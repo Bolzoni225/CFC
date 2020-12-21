@@ -320,6 +320,9 @@
     <Content Include="Views\Accueil.cshtml" />
     <Content Include="Views\Layout_app.cshtml" />
     <Content Include="Views\Layout_site.cshtml" />
+    <Content Include="Views\Apropos.cshtml" />
+    <Content Include="Views\Reference.cshtml" />
+    <Content Include="Views\Services.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
