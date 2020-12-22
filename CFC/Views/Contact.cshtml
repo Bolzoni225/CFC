@@ -91,40 +91,48 @@
                     <span>#</span>
                     <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagitti.</p>
                 </div>
+                @using (Html.BeginForm("SendMail", "Contact",FormMethod.Post))
+                {
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="btc_contact_map_inputs">
-                            <input type="text" placeholder="Nom">
+                            <input type="text" placeholder="Nom" id="nom" name="nom">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="btc_contact_map_inputs btc_contact_map_inputs3">
-                            <input type="email" placeholder="Adresse Email">
+                            <input type="email" placeholder="Adresse Email" id="email" name="email">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="btc_contact_map_inputs btc_contact_map_inputs2">
-                            <input type="text" placeholder="Téléphone">
+                            <input type="text" placeholder="Téléphone" id="phone" name="phone">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="btc_contact_map_inputs btc_contact_map_inputs2">
-                            <input type="text" placeholder="Objet du mail">
+                            <input type="text" placeholder="Objet du mail" id="objet" name="objet">
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="btc_contact_map_inputs btc_contact_map_inputs2">
-                            <textarea rows="6" placeholder="Message"></textarea>
+                            <textarea rows="6" placeholder="Message" id="message" name="message"></textarea>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="btc_contact_map_btn">
-                            <ul>
-                                <li><a href="#">Envoyez</a></li>
-                            </ul>
+                            <button type="submit">Envoyez</button>
+
+                            @*<ul>
+                                <li><a href="#" id="send">Envoyez</a></li>
+                                
+                            </ul>*@
                         </div>
                     </div>
                 </div>
+                }
+
+
             </div>
         </div>
     </div>
@@ -213,3 +221,19 @@
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqkdlwOxFDpOi-HZmR9yzw-lwWwk_sMVQ&callback=initMap"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#send").click(function () {
+            var ojbet = {
+                nom = $("#nom").val(),
+                objet = $("#objet").val(),
+                message = $("#message").val(),
+                phone = $("#phone").val()
+
+            };
+
+
+        });
+    });
+</script>
