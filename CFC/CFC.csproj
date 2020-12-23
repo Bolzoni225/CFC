@@ -505,6 +505,8 @@
     <Content Include="Views\Apropos.cshtml" />
     <Content Include="Views\Reference.cshtml" />
     <Content Include="Views\Services.cshtml" />
+    <Content Include="Views\Contact.cshtml" />
+    <Content Include="Views\Success.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
