@@ -3035,6 +3035,8 @@
     <Content Include="Umbraco\Views\Default.cshtml" />
     <Content Include="Umbraco\Views\Preview\Index.cshtml" />
     <Content Include="Umbraco\Views\web.config" />
+    <Content Include="Views\Contact.cshtml" />
+    <Content Include="Views\Success.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
