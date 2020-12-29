@@ -3113,6 +3113,7 @@
     <Content Include="Views\Dashboard.cshtml" />
     <Content Include="Views\Evenement.cshtml" />
     <Content Include="Views\ListeEvenements.cshtml" />
+    <Content Include="Views\FormParticipation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
