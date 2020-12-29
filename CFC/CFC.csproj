@@ -2937,7 +2937,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\RDVController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3114,6 +3116,7 @@
     <Content Include="Views\Evenement.cshtml" />
     <Content Include="Views\ListeEvenements.cshtml" />
     <Content Include="Views\FormParticipation.cshtml" />
+    <Content Include="Views\FormulaireRdv.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
