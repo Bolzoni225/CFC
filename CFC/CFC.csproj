@@ -398,6 +398,8 @@
     <Content Include="assets\images\header\slider_img-3.jpg" />
     <Content Include="assets\images\header\slider_img-3test.jpg" />
     <Content Include="assets\images\header\slider_img.jpg" />
+    <Content Include="assets\images\moovmoney.png" />
+    <Content Include="assets\images\omoney_logo.png" />
     <Content Include="assets\images\parteners_CFC\img1.png" />
     <Content Include="assets\images\parteners_CFC\img10.png" />
     <Content Include="assets\images\parteners_CFC\img11.png" />
@@ -3037,6 +3039,7 @@
     <Content Include="Umbraco\Views\web.config" />
     <Content Include="Views\Contact.cshtml" />
     <Content Include="Views\Success.cshtml" />
+    <Content Include="Views\FormParticipation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
