@@ -3114,6 +3114,7 @@
     <Content Include="Views\Evenement.cshtml" />
     <Content Include="Views\ListeEvenements.cshtml" />
     <Content Include="Views\FormParticipation.cshtml" />
+    <Content Include="Views\ListeParticipant.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,133 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.ListeParticipant>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "Layout_app.cshtml";
+}
+
+<div class="container-fluid overflow-hidden">
+    <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+        <!-- Page Title -->
+        <div id="page-title" class="padding-30px background-white full-width">
+            <div class="container">
+                <ol class="breadcrumb opacity-5">
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="active">Liste des participants</li>
+                </ol>
+                <h1 class="font-weight-300">LISTE DES PARTICIPANTS </h1>
+            </div>
+        </div>
+        <!-- // Page Title -->
+        <div class="margin-tb-45px full-width">
+
+            <!-- Demande item -->
+            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-left-45px padding-top-20px">
+
+                LA LISTE DES PARTICIPANTS
+                <br /><br />
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">NOM</th>
+                            <th scope="col">TITRE/FONCT°</th>
+                            <th scope="col">TELEPHONE</th>
+                            <th scope="col">ENTREPRISE</th>
+                            <th scope="col">EMAIL</th>
+                            <th scope="col">ANNEE DE CONSTITUTION</th>
+                            <th scope="col">SECTEUR ACTIVITE</th>
+                            <th scope="col">OBJET</th>
+                            <th scope="col">ADRESSE GEO</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*<tr>
+                            <th scope="row">Test</th>
+                            <td>Informaticien</td>
+                            <td>01020102</td>
+                            <td>As Consulting</td>
+                            <td>test@gmail.com</td>
+                            <td>2012</td>
+                            <td>Informatique</td>
+                            <td>Test</td>
+                            <td>Cocody</td>
+                            <td>
+                                <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-info" href="#"><i class="fas fa-eye"></i></a>
+                            </td>
+
+                        </tr>*@
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- // Demande item -->
+
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //swal("Attention", "Alert", "error");
+        charger_donnees();
+    });
+
+    function charger_donnees() {
+        //$("#staticBackdrop").modal("show");
+        $("tbody").append('<tr><td colspan="10" style="text-align:center;">Chargement en cours . . .</td></tr >');
+
+        //var operation = {
+        //    ID_LOCALITE: ''
+        //};
+        
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("ResultatRecherche", "Post")',
+            //data: { jsonObject: JSON.stringify(operation) },
+            dataType: "json",
+            success: function (data) {
+                if (data.ok == true) {
+                    if (data.data.length > 0) {
+                        $.each(data.data, function (i, val) {
+                            
+                            var line = '<tr>'
+                                + '<th scope="row" > ' + val.Specialite_Medecin + '</th>'
+                                +  '<td>Informaticien</td>'
+                                +  '<td>01020102</td>'
+                                + '<td>As Consulting</td>'
+                                +  '<td>test@gmail.com</td>'
+                                +  '<td>2012</td>'
+                                + '<td>Informatique</td>'
+                                + '<td>Test</td>'
+                                + '<td>Cocody</td>'
+                                + '<td>'
+                                + '   <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>'
+                                +  '</td>'
+                                +'</tr >';
+
+                            $("tbody").append(line);
+                        });
+                    } else {
+                        var error = '<tr><td colspan="2">Aucune données disponible ce tableau.</td></tr >';
+
+                        $("tbody").append(error);
+                    }
+
+                }
+                else {
+                    swal("Attention", data.message, "error");
+                }
+            },
+            error: function (msg) {
+                swal("Attention", data.message, "error");
+
+            }
+
+        });
+    }
+    
+</script>
