@@ -1,0 +1,85 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.ListeEvenements>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "Layout_app.cshtml";
+}
+
+<div class="container-fluid overflow-hidden">
+    <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+        <!-- Page Title -->
+        <div id="page-title" class="padding-30px background-white full-width">
+            <div class="container">
+                <ol class="breadcrumb opacity-5">
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="active">Liste évènement et coaching</li>
+                </ol>
+                <h1 class="font-weight-300">LISTE DES EVENEMENTS ET COACHINGS</h1>
+            </div>
+        </div>
+        <!-- // Page Title -->
+        <div class="margin-tb-30px full-width">
+
+            <!-- Demande item -->
+            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-left-45px padding-top-20px">
+
+                LA LISTE DES EVENEMENT / COACHING
+                <br /><br />
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">TITRE</th>
+                            <th scope="col">DESCRIPTION</th>
+                            <th scope="col">PAYANT</th>
+                            <th scope="col">TARIF</th>
+                            <th scope="col">PUBLIER</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Comment gagner de l'argent</th>
+                            <td>apprenez à gagner bcp bcp bcp d'argent</td>
+                            <td>OUI</td>
+                            <td>2500 FCFA</td>
+                            <td>NON</td>
+                            <td>
+                                <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-info" href="#"><i class="fas fa-eye"></i></a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">Comment gagner de l'argent</th>
+                            <td>apprenez à gagner bcp bcp bcp d'argent</td>
+                            <td>OUI</td>
+                            <td>2500 FCFA</td>
+                            <td>NON</td>
+                            <td>
+                                <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-info" href="#"><i class="fas fa-eye"></i></a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">Comment gagner de l'argent</th>
+                            <td>apprenez à gagner bcp bcp bcp d'argent</td>
+                            <td>OUI</td>
+                            <td>2500 FCFA</td>
+                            <td>NON</td>
+                            <td>
+                                <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-info" href="#"><i class="fas fa-eye"></i></a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- // Demande item -->
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Evenement>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+	Layout = "Layout_app.cshtml";
+}
+
+<div class="container-fluid overflow-hidden">
+    <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+        <!-- Page Title -->
+        <div id="page-title" class="padding-30px background-white full-width">
+            <div class="container">
+                <ol class="breadcrumb opacity-5">
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="active">Formulaire de création d'évènement et coaching</li>
+                </ol>
+                <h1 class="font-weight-300">FORMULAIRE DE CREATION DES EVENEMENT ET COACHING</h1>
+            </div>
+        </div>
+        <!-- // Page Title -->
+        <div class="margin-tb-30px full-width">
+
+            <!-- Demande item -->
+            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-left-45px padding-top-20px">
+                
+                VEUILLEZ REMPLIR CE FORMULAIRE POUR CREER UN EVENEMENT OU UN COACHING
+                <br /><br />
+                <hr class="margin-tb-5px">
+
+                <div class="row padding-right-45px">
+                    <div class="col-md-6 margin-bottom-20px">
+                        <label><i class="far fa-question-circle margin-right-10px"></i>  Type</label>
+                        <select class="selectpicker form-control">
+                            <option value="MA">Evènement</option>
+                            <option value="FE">Coaching</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 margin-bottom-20px">
+                        <label><i class="far fa-user margin-right-10px"></i> Nom</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="Nom">
+                    </div>
+                </div>
+
+                <div class="row padding-right-45px">
+                    <div class="col-md-6 margin-bottom-20px">
+                        <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="Titre">
+                    </div>
+                    <div class="col-md-6 margin-bottom-20px">
+                        <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
+                        <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching"></textarea>
+                    </div>
+
+                    <div class="col-md-6 margin-bottom-20px checkbox">
+                        <label>
+                            <input name="optionsCheckboxes" type="checkbox">
+                            Est payant
+                        </label>
+                    </div>
+                    <div class="col-md-6 margin-bottom-20px checkbox">
+                        <label>
+                            <input name="optionsCheckboxes" type="checkbox">
+                            Publier
+                        </label>
+                    </div>
+
+                    <div class="col-md-6 margin-bottom-20px">
+                        <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="Tarif">
+                    </div>
+                    <div class="col-md-6 margin-bottom-20px">
+                        <label><i class="far fa-money margin-right-10px"></i> Url image</label>
+                        <input type="file" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
+                    </div>
+                </div>
+
+
+                <div class="row padding-right-45px">
+                    <div class="col-md-6 margin-bottom-20px">
+                        <button class="btn btn-sm btn-success margin-right-15px">Valider</button>
+                        <button class="btn btn-sm btn-danger">Annuler</button>
+                    </div>
+                </div>
+            </div>
+            <!-- // Demande item -->
+
+        </div>
+    </div>
+</div>
