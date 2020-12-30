@@ -19,6 +19,8 @@ namespace CFC.Dto
         public string MotifDemande { get; set; }
         public string DescriptionMotif { get; set; }
         public DateTime DateRDV {get;set;}
+       public int RowidAuto { get; set; }
+        
 	
     }
 }
