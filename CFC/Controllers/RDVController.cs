@@ -24,9 +24,14 @@ namespace CFC.Controllers
         }
 
 
+
         [HttpPost]
-       public ActionResult DemandeRdv(FormCollection Data)
+        public JsonResult DemandeRdv(string value)
         {
+
+            var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
+            string url = string.Empty;
+
             try
             {
 
@@ -57,9 +62,9 @@ namespace CFC.Controllers
                         idRDV = lastRDV,
                         LibelleMotif = item
                     };
-                    _db.Insert<MotifDto>("TB_MOTIF","ROWIDAUTO",motif);
+                    _db.Insert<MotifDto>("TB_MOTIF", "ROWIDAUTO", motif);
                 }
-                                                          
+
                 url = Request.Url.GetLeftPart(UriPartial.Authority);
                 //return Redirect(url + "/success");
                 url = url + "/success";
@@ -67,10 +72,10 @@ namespace CFC.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
+                url = url + "/Echec";
+                return Json(new { ok = true, chemin = url }, JsonRequestBehavior.AllowGet);
             }
-            return View();
+
         }
         [HttpGet]
        public JsonResult ListeRDV()
