@@ -25,12 +25,8 @@ namespace CFC.Controllers
 
 
         [HttpPost]
-       public JsonResult DemandeRdv(string value)
+       public ActionResult DemandeRdv(FormCollection Data)
         {
-
-            var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
-            string url = string.Empty;
-
             try
             {
 
@@ -71,10 +67,10 @@ namespace CFC.Controllers
             }
             catch (Exception ex)
             {
-                url = url + "/Echec";
-                return Json(new { ok = true, chemin = url }, JsonRequestBehavior.AllowGet);
+
+                throw;
             }
-           
+            return View();
         }
     }
 }
