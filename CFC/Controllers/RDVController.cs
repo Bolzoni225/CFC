@@ -11,6 +11,7 @@ using NPoco;
 using System.Configuration;
 using CFC.Dto;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace CFC.Controllers
 {
@@ -76,5 +77,53 @@ namespace CFC.Controllers
             }
            
         }
+
+        #region Events / Coaching 
+        public async Task<JsonResult> ListeEventsCoaching()
+        {
+            var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+            return Json(new { data = liste }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AjouterEventCoaching(string value)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var eventCoaching = JsonConvert.DeserializeObject<EventDto>(value);
+                    await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                    return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> EventCoaching(int ID)
+        {
+            try
+            {
+                if (ID > 0)
+                {
+                    var eventCoaching = await _db.FirstOrDefaultAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID", ID));
+                    return Json(new { data = eventCoaching }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        #endregion
     }
 }

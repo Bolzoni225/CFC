@@ -1,89 +1,185 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Evenement>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-	Layout = "Layout_app.cshtml";
+    Layout = "Layout_app.cshtml";
 }
 
 <div class="container-fluid overflow-hidden">
     <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
         <!-- Page Title -->
-        <div id="page-title" class="padding-30px background-white full-width">
+        <div id="page-title" class="col- 12 padding-30px background-white full-width">
             <div class="container">
                 <ol class="breadcrumb opacity-5">
                     <li><a href="#">Accueil</a></li>
                     <li><a href="#">Dashboard</a></li>
-                    <li class="active">Formulaire de création d'évènement et coaching</li>
+                    <li class="active">Liste évènement et coaching</li>
                 </ol>
-                <h1 class="font-weight-300">FORMULAIRE DE CREATION DES EVENEMENT ET COACHING</h1>
+                <h1 class="font-weight-300">EVENEMENTS ET COACHINGS</h1>
             </div>
         </div>
         <!-- // Page Title -->
         <div class="margin-tb-30px full-width">
-
             <!-- Demande item -->
-            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-left-45px padding-top-20px">
-                
-                VEUILLEZ REMPLIR CE FORMULAIRE POUR CREER UN EVENEMENT OU UN COACHING
+            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-top-20px">
+                @*<h2>LA LISTE DES EVENEMENT / COACHING</h2>*@
                 <br /><br />
-                <hr class="margin-tb-5px">
+                <div class="col-12" id="tableEvents"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <div class="row padding-right-45px">
-                    <div class="col-md-6 margin-bottom-20px">
-                        <label><i class="far fa-question-circle margin-right-10px"></i>  Type</label>
-                        <select class="selectpicker form-control">
-                            <option value="MA">Evènement</option>
-                            <option value="FE">Coaching</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 margin-bottom-20px">
-                        <label><i class="far fa-user margin-right-10px"></i> Nom</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Nom">
-                    </div>
+<script>
+    $(function () {
+        $("#tableEvents").jsGrid({
+            width: "100%",
+            height: "400px",
+            sorting: true,
+            paging: true,
+            autoload: true,
+            rowClick: function (args) {
+                const id = args.item.ROWID;
+                $.ajax({
+                    url: '@Url.Action("EventCoaching", "RDV")',
+                    method: "post",
+                    data: {ID : JSON.stringify(id)}
+                }).done(function (retour) {
+                    debugger;
+                }).catch(error => console.log(error));
+                debugger;
+            },
+            controller: {
+                loadData: function () {
+                    const d = $.Deferred();
+                    $.ajax({
+                        url: '@Url.Action("ListeEventsCoaching", "RDV")',
+                        method: "get"
+                    }).done(function (retour) {
+                        debugger;
+                        const result = retour.data.length > 0 ? retour.data : [];
+                        d.resolve(result);
+                    });
+                    return d.promise();
+                },
+                deleteItem: $.noop
+            },
+            fields: [
+                { name: "ROWID", type: Number, visible: false },
+                { name: "TITRE", title: "TITRE", type: "text", width: 30 },
+                { name: "DESCRIPTION", title: "DESCRIPTION", type: "text", width: 30 },
+                {
+                    name: "ESTPAYANT", title: "PAYANT", type: "text", width: 5,
+                    itemTemplate: function (value,item) {
+                        return item.ESTPAYANT ? 'OUI' : 'NON';
+                    }
+                },
+                { name: "TARIF", title: "TARIF", type: "text", width: 10 },
+                {
+                    name: "ESTPUBLIER", title: "PUBLIER", type: "text", width: 5,
+                    itemTemplate: function (value, item) {
+                        return item.ESTPUBLIER ? 'OUI' : 'NON';
+                    }
+                },
+                {
+                    type: "control",
+                    modeSwitchButton: false,
+                    width: 25,
+                    editButton: false,
+                    headerTemplate: function () {
+                        return $("<button class='btn btn-secondary'><i class='fa fa-plus'></i> nouveau</button>")
+                            .on("click", _ => {
+                                $("#myPopUp").dialog({
+                                    autoOpen: false,
+                                    width: 850,
+                                    title: "Nouveau",
+                                    buttons: [
+                                        {
+                                            text: "Enregistrer",
+                                            click: function () {
+                                                Enregistrer();
+                                                $(this).dialog("close");
+                                            }
+                                        },
+                                        {
+                                            text: "Annuler",
+                                            click: function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    ],
+                                }).dialog("open");
+                            });
+                    }
+                }
+            ]
+        });
+    });
+
+
+    function Enregistrer() {
+        alert("enregistrement");
+    }
+</script>
+
+
+<div id="myPopUp">
+    <div class="row">
+        <!-- Demande item -->
+        <div class="background-grey thum-hover full-width  padding-top-20px">
+
+            VEUILLEZ REMPLIR CE FORMULAIRE POUR CREER UN EVENEMENT OU UN COACHING
+            <br /><br />
+            <hr class="margin-tb-5px">
+
+            <div class="row padding-right-45px">
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-question-circle margin-right-10px"></i>  Type</label>
+                    <select class="selectpicker form-control" id="selType">
+                        <option value="0" disabled selected>--Sélectionner--</option>
+                        <option value="1">Evènement</option>
+                        <option value="2">Coaching</option>
+                    </select>
                 </div>
-
-                <div class="row padding-right-45px">
-                    <div class="col-md-6 margin-bottom-20px">
-                        <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Titre">
-                    </div>
-                    <div class="col-md-6 margin-bottom-20px">
-                        <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
-                        <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching"></textarea>
-                    </div>
-
-                    <div class="col-md-6 margin-bottom-20px checkbox">
-                        <label>
-                            <input name="optionsCheckboxes" type="checkbox">
-                            Est payant
-                        </label>
-                    </div>
-                    <div class="col-md-6 margin-bottom-20px checkbox">
-                        <label>
-                            <input name="optionsCheckboxes" type="checkbox">
-                            Publier
-                        </label>
-                    </div>
-
-                    <div class="col-md-6 margin-bottom-20px">
-                        <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Tarif">
-                    </div>
-                    <div class="col-md-6 margin-bottom-20px">
-                        <label><i class="far fa-money margin-right-10px"></i> Url image</label>
-                        <input type="file" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
-                    </div>
-                </div>
-
-
-                <div class="row padding-right-45px">
-                    <div class="col-md-6 margin-bottom-20px">
-                        <button class="btn btn-sm btn-success margin-right-15px">Valider</button>
-                        <button class="btn btn-sm btn-danger">Annuler</button>
-                    </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-user margin-right-10px"></i> Nom</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nom" id="txtNom">
                 </div>
             </div>
-            <!-- // Demande item -->
 
+            <div class="row padding-right-45px">
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Titre" id="txt">
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
+                    <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching"></textarea>
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox">
+                        Est payant
+                    </label>
+                </div>
+                <div class="col-md-6 margin-bottom-20px checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox">
+                        Publier
+                    </label>
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Tarif">
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-money margin-right-10px"></i> Url image</label>
+                    <input type="file" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
+                </div>
+            </div>
         </div>
+        <!-- // Demande item -->
+
     </div>
 </div>

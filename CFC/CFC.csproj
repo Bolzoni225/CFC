@@ -2943,6 +2943,7 @@
     <Compile Include="Controllers\RDVController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="DAL.cs" />
+    <Compile Include="Dto\EventDto.cs" />
     <Compile Include="Dto\MotifDto.cs" />
     <Compile Include="Dto\RdvDto.cs" />
     <Compile Include="Dto\RdvModel.cs" />
