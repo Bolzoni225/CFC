@@ -35,10 +35,10 @@
                             <th scope="col">ENTREPRISE</th>
                             <th scope="col">EMAIL</th>
                             <th scope="col">ANNEE DE CONSTITUTION</th>
-                            <th scope="col">SECTEUR ACTIVITE</th>
+                            @*<th scope="col">SECTEUR ACTIVITE</th>*@
                             <th scope="col">OBJET</th>
                             <th scope="col">ADRESSE GEO</th>
-                            <th scope="col">ACTION</th>
+                            @*<th scope="col">ACTION</th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -85,28 +85,28 @@
         //};
         
         $.ajax({
-            type: 'POST',
-            url: '@Url.Action("ResultatRecherche", "Post")',
+            type: 'GET',
+            url: '@Url.Action("ListeParticipants", "RDV")',
             //data: { jsonObject: JSON.stringify(operation) },
             dataType: "json",
             success: function (data) {
+                $("tbody").html("");
                 if (data.ok == true) {
                     if (data.data.length > 0) {
                         $.each(data.data, function (i, val) {
                             
                             var line = '<tr>'
-                                + '<th scope="row" > ' + val.Specialite_Medecin + '</th>'
-                                +  '<td>Informaticien</td>'
-                                +  '<td>01020102</td>'
-                                + '<td>As Consulting</td>'
-                                +  '<td>test@gmail.com</td>'
-                                +  '<td>2012</td>'
-                                + '<td>Informatique</td>'
-                                + '<td>Test</td>'
-                                + '<td>Cocody</td>'
-                                + '<td>'
-                                + '   <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>'
-                                +  '</td>'
+                                + '<th scope="row" > ' + val.NomPrenoms + '</th>'
+                                + '<td>' + val.Titre + '</td>'
+                                + '<td>' + val.Telephone + '</td>'
+                                + '<td>' + val.NomEts + '</td>'
+                                + '<td>' + val.email + '</td>'
+                                + '<td>' + val.AnneeConstitution + '</td>'
+                                + '<td>' + val.objet + '</td>'
+                                + '<td>' + val.Adressegeographique + '</td>'
+                                //+ '<td>'
+                                //+ '   <a class="btn btn-primary" onclick="' + val.rowid + '"><i class="fas fa-edit"></i></a>'
+                                //+  '</td>'
                                 +'</tr >';
 
                             $("tbody").append(line);
@@ -119,7 +119,8 @@
 
                 }
                 else {
-                    swal("Attention", data.message, "error");
+                    //swal("Attention", data.message, "error");
+                    $("tbody").append('<tr><td colspan="10" style="text-align:center;">' + data.message+'</td></tr >');
                 }
             },
             error: function (msg) {
