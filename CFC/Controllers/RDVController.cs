@@ -10,6 +10,7 @@ using CFC;
 using NPoco;
 using System.Configuration;
 using CFC.Dto;
+using Newtonsoft.Json;
 
 namespace CFC.Controllers
 {
@@ -25,7 +26,7 @@ namespace CFC.Controllers
 
         [HttpPost]
        public ActionResult DemandeRdv(FormCollection Data)
-        {
+       {
             try
             {
                 var nom = Data["Nom"];
@@ -63,6 +64,71 @@ namespace CFC.Controllers
                 throw;
             }
             return View();
+       }
+
+        #region Liste Participant ***by brice***
+        [HttpGet]
+        public JsonResult ListeParticipants()
+        {
+            // _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+            //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+            try
+            {
+                var liste = _db.Fetch<ParticipantDto>(new Sql().Select("*").From("TB_PARTICPANT"));
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            
         }
+        #endregion
+
+        #region News Events ***by brice***
+        [HttpGet]
+        public JsonResult NewsEvents()
+        {
+            //var liste = _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ESTPUBLIER = @estPublier", "ESTPAYANT = @estPayant", new { estPublier = false, estPayant = true }));
+
+            try
+            {
+                var liste = _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ESTPUBLIER = @estPublier", new { estPublier = true }));
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [HttpPost]//pas soumit au service
+        public JsonResult CreateCurrentEvent(string jsonObject)
+        {
+            try
+            {
+                var currentEvent = JsonConvert.DeserializeObject<CurrentEventModel>(jsonObject);
+                if (currentEvent != null)
+                {
+                    Session["CurrentEvent"] = currentEvent;
+
+                    return Json(new { ok = true, message = "", url = "/FormParticipation" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return Json(new { ok = false, message = "Participation Impossible" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex.Message);
+                return Json(new { ok = false, message = ex.Message });
+            }
+
+        }
+        #endregion
     }
 }

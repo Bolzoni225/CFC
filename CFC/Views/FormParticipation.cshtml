@@ -1,141 +1,161 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.FormParticipation>
-    @using ContentModels = Umbraco.Web.PublishedModels;
-    @{
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using CFC.Dto;
+@{
     Layout = "Layout_site.cshtml";
+
+    var ROWID = 0; var NOM = ""; var TITRE = ""; var ESTPAYANT = 0; decimal TARIF = 0;
+
+    var currentEvent = new CurrentEventModel();
+    if (Session["CurrentEvent"] != null)
+    {
+        currentEvent = Session["CurrentEvent"] as CurrentEventModel;
+        ROWID = currentEvent.ROWID;
+        NOM = currentEvent.NOM;
+        TITRE = currentEvent.TITRE;
+        ESTPAYANT = currentEvent.ESTPAYANT;
+        TARIF = currentEvent.TARIF;
+    }
+}
+
+
+<style>
+    /* HIDE RADIO */
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
     }
 
-
-    <style>
-        /* HIDE RADIO */
-        [type=radio] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
         }
 
-            /* IMAGE STYLES */
-            [type=radio] + img {
-                cursor: pointer;
-            }
-
-            /* CHECKED STYLES */
-            [type=radio]:checked + img {
-                outline: 2px solid #f00;
-            }
-    </style>
-    <!-- Header Wrapper End -->
-    <!-- btc tittle Wrapper Start -->
-    <div class="btc_tittle_main_wrapper">
-        <div class="btc_tittle_img_overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 full_width">
-                    <div class="btc_tittle_left_heading">
-                        <h1>Participer à l'évènement</h1>
-                    </div>
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 2px solid #f00;
+        }
+</style>
+<!-- Header Wrapper End -->
+<!-- btc tittle Wrapper Start -->
+<div class="btc_tittle_main_wrapper">
+    <div class="btc_tittle_img_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 full_width">
+                <div class="btc_tittle_left_heading">
+                    <h1>Participer à l'évènement</h1>
                 </div>
-
             </div>
+
         </div>
     </div>
-    <!-- btc tittle Wrapper End -->
-    <!-- btc calcultor Wrapper Start -->
-    <div class="btc_calc_main_wrapper">
-        <div class="btc_calc_img_overlay"></div>
-        <div class="container">
-            <div class="row">
+</div>
+<!-- btc tittle Wrapper End -->
+<!-- btc calcultor Wrapper Start -->
+<div class="btc_calc_main_wrapper">
+    <div class="btc_calc_img_overlay"></div>
+    <div class="container">
+        <div class="row">
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                    <div class="col-lg-6">
-                        <div class="divider_30">
+                <div class="col-lg-6">
+                    <div class="divider_30">
+                        <div class="cal-convertor">
+                            <div class="form-group">
+
+                                <label class="control-label"> Nom et prénoms</label>
+                                <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
+
+                            </div>
+                            <div class="form-group">
+
+                                <label class="control-label"> Titre Fonction</label>
+                                <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
+                            </div>
+                            <div class="form-group">
+
+                                <label class="control-label"> Téléphone</label>
+                                <input type="tel" id="phone" name="phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"> Email</label>
+                                <input type="email" id="email" name="email" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="divider_30">
+                        <div class="cal-convertor">
                             <div class="cal-convertor">
                                 <div class="form-group">
 
-                                    <label class="control-label"> Nom et prénoms</label>
+                                    <label class="control-label"> Nom Entreprise</label>
                                     <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
 
                                 </div>
                                 <div class="form-group">
 
-                                    <label class="control-label"> Titre Fonction</label>
+                                    <label class="control-label"> Année constitution</label>
                                     <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
                                 </div>
                                 <div class="form-group">
 
-                                    <label class="control-label"> Téléphone</label>
+                                    <label class="control-label"> Secteur d'activité</label>
                                     <input type="tel" id="phone" name="phone" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label"> Email</label>
+                                    <label class="control-label"> Adresse géographique</label>
                                     <input type="email" id="email" name="email" class="form-control">
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="divider_30">
-                            <div class="cal-convertor">
-                                <div class="cal-convertor">
-                                    <div class="form-group">
 
-                                        <label class="control-label"> Nom Entreprise</label>
-                                        <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
-
-                                    </div>
-                                    <div class="form-group">
-
-                                        <label class="control-label"> Année constitution</label>
-                                        <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-
-                                        <label class="control-label"> Secteur d'activité</label>
-                                        <input type="tel" id="phone" name="phone" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"> Adresse géographique</label>
-                                        <input type="email" id="email" name="email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- btc calcultor Wrapper End -->
-    <!-- btc Video Wrapper Start -->
-    <div class="row" style="height:-5%;">
-        <div class="">
+</div>
+<!-- btc calcultor Wrapper End -->
+<!-- btc Video Wrapper Start -->
+@{
+    if (ESTPAYANT == 1)
+    {
+        <div class="row" style="height:-5%;">
             <div class="">
+                <div class="">
 
-                <h1 class="text-center">UTILISER LES MOYENS DE PAIEMENTS ELECTRONIQUE POUR RESERVER VOTRE PLACE</h1>
-                <div class="row text-center">
-                    <label>
-                        <input type="radio" name="test" value="small" checked>
-                        <img src="~/assets/images/omoney_logo.png">
-                    </label>
+                    <h1 class="text-center">UTILISER LES MOYENS DE PAIEMENTS ELECTRONIQUE POUR RESERVER VOTRE PLACE</h1>
+                    <div class="row text-center">
+                        <label>
+                            <input type="radio" name="test" value="small" checked>
+                            <img src="~/assets/images/omoney_logo.png">
+                        </label>
 
-                    <label>
-                        <input type="radio" name="test" value="big">
-                        <img src="~/assets/images/moovmoney.png">
-                    </label>
+                        <label>
+                            <input type="radio" name="test" value="big">
+                            <img src="~/assets/images/moovmoney.png">
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
-
-    <div class="btc_video_main_wrapper">
-        <div class="container">
-        
-            <div class="row btc_video_center_wrapper text-center">
-               <button class="btn btn-lg" type="submit">RESERVER MA PLACE</button>
             </div>
         </div>
+    }
+}
+
+
+<div class="btc_video_main_wrapper">
+    <div class="container">
+
+        <div class="row btc_video_center_wrapper text-center">
+            <button class="btn btn-lg" type="submit">RESERVER MA PLACE</button>
+        </div>
     </div>
+</div>
