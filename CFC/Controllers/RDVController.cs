@@ -25,8 +25,9 @@ namespace CFC.Controllers
         }
 
 
+
         [HttpPost]
-       public JsonResult DemandeRdv(string value)
+        public JsonResult DemandeRdv(string value)
         {
 
             var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
@@ -62,9 +63,9 @@ namespace CFC.Controllers
                         idRDV = lastRDV,
                         LibelleMotif = item
                     };
-                    _db.Insert<MotifDto>("TB_MOTIF","ROWIDAUTO",motif);
+                    _db.Insert<MotifDto>("TB_MOTIF", "ROWIDAUTO", motif);
                 }
-                                                          
+
                 url = Request.Url.GetLeftPart(UriPartial.Authority);
                 //return Redirect(url + "/success");
                 url = url + "/success";
@@ -75,7 +76,23 @@ namespace CFC.Controllers
                 url = url + "/Echec";
                 return Json(new { ok = true, chemin = url }, JsonRequestBehavior.AllowGet);
             }
-           
+
+        }
+        [HttpGet]
+       public JsonResult ListeRDV()
+        {
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV");
+            var liste = _db.Fetch<RdvDto>(sql);
+            return Json(new { ok = true, liste = liste.ToList() }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RDVUnique(string id)
+        {
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV where rowidauto="+id);
+            var liste = _db.Fetch<RdvDto>(sql);
+            Sql sqlMotif = new Sql("SELECT  LibelleMotif from TB_MOTIF WHERE IdRDV="+id);
+            var ListeMotif = _db.Fetch<MotifDto>(sqlMotif);
+            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif }, JsonRequestBehavior.AllowGet);
         }
 
         #region Events / Coaching 
