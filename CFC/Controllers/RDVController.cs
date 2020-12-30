@@ -10,6 +10,7 @@ using CFC;
 using NPoco;
 using System.Configuration;
 using CFC.Dto;
+using Newtonsoft.Json;
 
 namespace CFC.Controllers
 {
@@ -24,45 +25,56 @@ namespace CFC.Controllers
 
 
         [HttpPost]
-       public ActionResult DemandeRdv(FormCollection Data)
+       public JsonResult DemandeRdv(string value)
         {
+
+            var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
+            string url = string.Empty;
+
             try
             {
-                var nom = Data["Nom"];
-                var prenoms = Data["Prenoms"];
-                var phone = Data["phone"];
-                var mail = Data["email"];
-                var nomets = Data["nomets"];
-                var anneeconstitution = Data["anneeconstitution"];
-                var chiffreAffaire = Data["chiffreAffaire"];
-                var effectif = Data["effectif"];
-                var motif = Data["motif"];
-                var description = Data["description"];
+
 
                 var NewEvent = new RdvDto()
                 {
-                    AnneeConstitution = anneeconstitution,
-                    ChiffreAffaire = chiffreAffaire,
-                    DescriptionMotif = description,
-                    Email = mail,
-                    NomDemandeur = nom,
-                    PrenomsDemandeur = prenoms,
-                    Telephone = phone,
-                    NomEntreprise = nomets,
-                    DateRDV = DateTime.Now
+                    AnneeConstitution = RDV.AnneeConstitution,
+                    ChiffreAffaire = RDV.ChiffreAffaire,
+                    DescriptionMotif = RDV.DescriptionMotif,
+                    Email = RDV.Email,
+                    NomDemandeur = RDV.NomDemandeur,
+                    PrenomsDemandeur = RDV.PrenomsDemandeur,
+                    Telephone = RDV.Telephone,
+                    NomEntreprise = RDV.NomEntreprise,
+                    DateRDV = Convert.ToDateTime(RDV.DateRDV),
+                    Fonction = RDV.Fonction,
+                    ObjetRDV = RDV.ObjetRDV
 
                 };
+                Sql sql = new Sql("SELECT TOP   1 * FROM TB_RDV ORDER BY ROWIDAUTO DESC");
+                _db.Insert<RdvDto>("TB_RDV", "RowidAuto", NewEvent);
+                var lastRDV = _db.Fetch<RdvDto>(sql).First().RowidAuto;
 
-                _db.Insert<RdvDto>("TB_RDV", "ROWID", NewEvent);
-                var url = Request.Url.GetLeftPart(UriPartial.Authority);
-                return Redirect(url + "/success");
+                foreach (var item in RDV.ListeMotif)
+                {
+                    var motif = new MotifDto()
+                    {
+                        idRDV = lastRDV,
+                        LibelleMotif = item
+                    };
+                    _db.Insert<MotifDto>("TB_MOTIF","ROWIDAUTO",motif);
+                }
+                                                          
+                url = Request.Url.GetLeftPart(UriPartial.Authority);
+                //return Redirect(url + "/success");
+                url = url + "/success";
+                return Json(new { ok = true, chemin = url }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-
-                throw;
+                url = url + "/Echec";
+                return Json(new { ok = true, chemin = url }, JsonRequestBehavior.AllowGet);
             }
-            return View();
+           
         }
     }
 }

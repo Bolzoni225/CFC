@@ -338,6 +338,7 @@
     <Content Include="assets\css\style.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\images\cancelimg.png" />
     <Content Include="assets\images\content\about_buy_bg.jpg" />
     <Content Include="assets\images\content\about_down.png" />
     <Content Include="assets\images\content\bit_coin_bg.jpg" />
@@ -2942,7 +2943,9 @@
     <Compile Include="Controllers\RDVController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="DAL.cs" />
+    <Compile Include="Dto\MotifDto.cs" />
     <Compile Include="Dto\RdvDto.cs" />
+    <Compile Include="Dto\RdvModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3121,6 +3124,7 @@
     <Content Include="Views\FormParticipation.cshtml" />
     <Content Include="Views\FormulaireRdv.cshtml" />
     <Content Include="Views\ListeParticipant.cshtml" />
+    <Content Include="Views\Echec.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
