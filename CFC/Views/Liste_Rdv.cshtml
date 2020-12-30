@@ -1,0 +1,272 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Liste_Rdv>
+    @using ContentModels = Umbraco.Web.PublishedModels;
+    @{
+    Layout = "Layout_app.cshtml";
+    }
+
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css" />
+
+
+    <div class="container-fluid overflow-hidden">
+        <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+            <!-- Page Title -->
+            <div id="page-title" class="padding-30px background-white full-width">
+                <div class="container">
+                    <ol class="breadcrumb opacity-5">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li class="active">Liste des Rendez-vous</li>
+                    </ol>
+                    <h1 class="font-weight-300">LISTE DES Rendez-vous</h1>
+                </div>
+            </div>
+            <!-- // Page Title -->
+            <div class="margin-tb-30px full-width">
+
+                <!-- Demande item -->
+                <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-left-45px padding-top-20px">
+
+                    LA LISTE DES RDV
+                    <br /><br />
+
+                    <table class="table table-striped" id="tbrdv">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nom & Prenoms Demandeur</th>
+                                <th scope="col">Téléphone</th>
+                                <th scope="col">Description</th>
+
+                                <th scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+                <!-- // Demande item -->
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="mymodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail RDV</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row col-md-12 col-lg-12">
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i> Nom / Prénoms Demandeur</label>
+                            <input type="text" class="form-control form-control-sm" id="nomdem" placeholder="nom & prenoms" readonly>
+                        </div>
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-list-alt margin-right-10px"></i> Description du motif</label>
+                            <textarea type="text" class="form-control form-control-sm" id="description" placeholder="Description évènement / coaching" readonly></textarea>
+                        </div>
+
+                        <div class="col-md-6 margin-bottom-20px">
+
+                            <label><i class="far fa-tasks margin-right-10px"></i> Téléphone</label>
+                            <input type="text" class="form-control form-control-sm" id="phone" placeholder="Téléphone" readonly>
+
+                        </div>
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Email</label>
+                            <input type="text" class="form-control form-control-sm" id="email" placeholder="Email" readonly>
+
+                        </div>
+
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Fonction</label>
+                            <input type="text" class="form-control form-control-sm" id="fonction" placeholder="Fonction" readonly>
+
+                        </div>
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Nom Ets</label>
+                            <input type="text" class="form-control form-control-sm" id="nomEts" placeholder="Nom entreprise" readonly>
+
+                        </div>
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Année Constitution</label>
+                            <input type="text" class="form-control form-control-sm" id="Annec" placeholder="Année Constitution" readonly>
+
+                        </div>
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Chiffre Affaire</label>
+                            <input type="text" class="form-control form-control-sm" id="CA" placeholder="Chiffre d'Affaire" readonly>
+
+                        </div>
+
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Objet RDV</label>
+                            <input type="text" class="form-control form-control-sm" id="objet" placeholder="" readonly>
+
+                        </div>
+
+                      
+
+                    </div>
+                    <div class="row col-lg-12 col-md-12">
+
+
+                        <table id="tbmotif" class="table width-100px">
+                            <thead>
+                                <tr>
+                                    <td>Motifs</td>
+                                </tr>
+
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close">Fermer</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="~/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#tbrdv').DataTable({
+                columns: [
+                    { "data": "ID" },
+                    { "data": "NomDem" },
+                    { "data": "Telephone" },
+                    { "data": "Description" },
+                    { "data": "ACTION" },
+
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        visible: false
+                    }],
+                data: [],
+            });
+            var tbMotif = $('#tbmotif').DataTable({
+                columns: [
+                    { "data": "motif" }
+                   ],
+                columnDefs: [
+                    {
+                    
+                    }],
+                data: [],
+             
+            });
+
+            debugger
+            $.ajax({
+                type: "GET",
+                url: "/Umbraco/Surface/RDV/ListeRDV",
+                success: function (res) {
+                    if (res.ok === true) {
+                        $.each(res.liste, function (i, n) {
+                            table.rows.add([{
+                                "ID": n.RowidAuto,
+                                "NomDem": n.NomDemandeur + ' ' + n.PrenomsDemandeur,
+                                "Telephone": n.Telephone,
+                                "Description": n.DescriptionMotif,
+                                "ACTION": '<td><a class= "btn btn-primary" href="#" > <i class="fas fa-edit"></i></a><a class="btn btn-info" href="#" id="details"><i class="fas fa-eye"></i></a></td >'
+                            }]).draw();
+                        });
+                    }
+                },
+                error: function (res) {
+
+                }
+            });
+
+
+
+            $("#close").click(function () {
+                $("#mymodal").modal("hide");
+            });
+
+
+
+
+            $('#tbrdv').on('click', 'td > a[id=details]', function () {
+                debugger
+                var data_row = table.row($(this).closest('tr')).data();
+                var idRdv = data_row.ID;
+         
+            
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Umbraco/Surface/RDV/RDVUnique",
+                    data: { "id": JSON.stringify(idRdv) },
+                    success: function (res) {
+                        debugger
+                        if (res.ok == true) {
+                            $.each(res.liste, function (i, n) {
+                                debugger
+                                $("#nomdem").val(n.NomDemandeur + " " + n.PrenomsDemandeur);
+                                $("#description").val(n.DescriptionMotif);
+                                $("#phone").val(n.Telephone);
+                                $("#email").val(n.Email);
+                                $("#fonction").val(n.fonction);
+                                $("#nomEts").val(n.NomEntreprise);
+                                $("#Annec").val(n.AnneeConstitution);
+                                $("#CA").val(n.ChiffreAffaire);
+                                $("#Objet").val(n.ObjetRDV);
+                                $.each(res.ListMotif, function (i, t) {
+                                  debugger
+                                    tbMotif.rows.add([{
+                                            "motif": t.LibelleMotif,
+                                           
+                                        }]).draw();
+                               
+                                });
+                            });
+                            $("#mymodal").modal("show");
+                        }
+                        
+
+
+                    }
+                });
+       
+
+                return false;
+
+            });
+
+           
+        });
+    </script>

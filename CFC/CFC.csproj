@@ -3125,6 +3125,7 @@
     <Content Include="Views\FormulaireRdv.cshtml" />
     <Content Include="Views\ListeParticipant.cshtml" />
     <Content Include="Views\Echec.cshtml" />
+    <Content Include="Views\Liste_Rdv.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

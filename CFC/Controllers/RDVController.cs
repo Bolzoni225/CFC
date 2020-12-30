@@ -76,5 +76,21 @@ namespace CFC.Controllers
             }
            
         }
+        [HttpGet]
+       public JsonResult ListeRDV()
+        {
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV");
+            var liste = _db.Fetch<RdvDto>(sql);
+            return Json(new { ok = true, liste = liste.ToList() }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RDVUnique(string id)
+        {
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV where rowidauto="+id);
+            var liste = _db.Fetch<RdvDto>(sql);
+            Sql sqlMotif = new Sql("SELECT  LibelleMotif from TB_MOTIF WHERE IdRDV="+id);
+            var ListeMotif = _db.Fetch<MotifDto>(sqlMotif);
+            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif }, JsonRequestBehavior.AllowGet);
+        }
     }
 }
