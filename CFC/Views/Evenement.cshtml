@@ -30,6 +30,7 @@
 </div>
 
 <script>
+    let ID = 0;
     $(function () {
         $("#tableEvents").jsGrid({
             width: "100%",
@@ -39,14 +40,43 @@
             autoload: true,
             rowClick: function (args) {
                 const id = args.item.ROWID;
+                ID = parseInt(id);
                 $.ajax({
                     url: '@Url.Action("EventCoaching", "RDV")',
                     method: "post",
                     data: {ID : JSON.stringify(id)}
                 }).done(function (retour) {
                     debugger;
-                }).catch(error => console.log(error));
-                debugger;
+                    $("#selType").val(retour.TYPE);
+                    $("#txtNom").val(retour.NOM);
+                    $("#txtTitre").val(retour.TITRE);
+                    $("#txtDescription").val(retour.DESCRIPTION);
+                    $("#txtDescription").val(retour.DESCRIPTION);
+                    retour.ESTPAYANT ? $("#chkEstPayant").is(":checked", true) : $("#chkEstPayant").is(":checked", false);
+                    retour.ESTPUBLIER ? $("#chkEstPublier").is(":checked", true) : $("#chkEstPublier").is(":checked", false);
+                    $("#txtTarif").val(retour.TARIF);
+
+                    //$("#myPopUp").dialog({
+                    //    autoOpen: false,
+                    //    width: 850,
+                    //    title: "Modifier",
+                    //    buttons: [
+                    //        {
+                    //            text: "Enregistrer",
+                    //            click: function () {
+                    //                Enregistrer();
+                    //                $(this).dialog("close");
+                    //            }
+                    //        },
+                    //        {
+                    //            text: "Annuler",
+                    //            click: function () {
+                    //                $(this).dialog("close");
+                    //            }
+                    //        }
+                    //    ],
+                    //}).dialog("close");
+                 }).catch(error => console.log(error));
             },
             controller: {
                 loadData: function () {
@@ -117,7 +147,23 @@
 
 
     function Enregistrer() {
-        alert("enregistrement");
+        const item = {
+            rowid: ID,
+            nom: $("#txtNom").val(),
+            titre: $("#txtTitre").val(),
+            description: $("#txtDescription").val(),
+            estPayant: $("#chkPayant").is(":checked"),
+            estPublier: $("#chkPublier").is(":checked"),
+            tarif: parseFloat($("#txtTarif").val())
+        };
+
+        $.ajax({
+            url: '@Url.Action("AjouterEventCoaching","RDV")',
+            method: "post",
+            data: { value: JSON.stringify(item) }
+        }).done(function (retour) {
+
+        }).catch(error => console.log(error));
     }
 </script>
 
@@ -149,29 +195,29 @@
             <div class="row padding-right-45px">
                 <div class="col-md-6 margin-bottom-20px">
                     <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Titre" id="txt">
+                    <input type="text" class="form-control form-control-sm" placeholder="Titre" id="txtTitre">
                 </div>
                 <div class="col-md-6 margin-bottom-20px">
                     <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
-                    <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching"></textarea>
+                    <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching" id="txtDescription"></textarea>
                 </div>
 
                 <div class="col-md-6 margin-bottom-20px checkbox">
                     <label>
-                        <input name="optionsCheckboxes" type="checkbox">
+                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPayant">
                         Est payant
                     </label>
                 </div>
                 <div class="col-md-6 margin-bottom-20px checkbox">
                     <label>
-                        <input name="optionsCheckboxes" type="checkbox">
+                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPublier">
                         Publier
                     </label>
                 </div>
 
                 <div class="col-md-6 margin-bottom-20px">
                     <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Tarif">
+                    <input type="text" class="form-control form-control-sm" placeholder="Tarif" id="txtTarif">
                 </div>
                 <div class="col-md-6 margin-bottom-20px">
                     <label><i class="far fa-money margin-right-10px"></i> Url image</label>

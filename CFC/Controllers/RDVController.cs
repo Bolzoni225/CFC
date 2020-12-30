@@ -111,7 +111,7 @@ namespace CFC.Controllers
             {
                 if (ID > 0)
                 {
-                    var eventCoaching = await _db.FirstOrDefaultAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID", ID));
+                    var eventCoaching = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", ID));
                     return Json(new { data = eventCoaching }, JsonRequestBehavior.AllowGet);
                 }
             }
