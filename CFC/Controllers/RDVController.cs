@@ -110,7 +110,42 @@ namespace CFC.Controllers
                 if (!string.IsNullOrEmpty(value))
                 {
                     var eventCoaching = JsonConvert.DeserializeObject<EventDto>(value);
-                    await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                    if (eventCoaching.ROWID == 0)
+                    {
+                        await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                        return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    var ancien = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", eventCoaching.ROWID));
+                    //ancien.ROWID = eventCoaching.ROWID;
+                    ancien.LIEU = eventCoaching.LIEU;
+                    ancien.NOM = eventCoaching.NOM;
+                    ancien.TARIF = eventCoaching.TARIF;
+                    ancien.TITRE = eventCoaching.TITRE;
+                    ancien.TYPE = eventCoaching.TYPE;
+                    ancien.URLIMAGE = eventCoaching.URLIMAGE;
+                    ancien.DESCRIPTION = eventCoaching.DESCRIPTION;
+                    ancien.ESTPAYANT = eventCoaching.ESTPAYANT;
+                    ancien.ESTPUBLIER = eventCoaching.ESTPUBLIER;
+                    _db.Update("TB_EVENT", "ROWID", ancien);
+                    return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                }   
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SupprimerEventCoaching(int ID)    
+        {
+            try
+            {
+                if (ID > 0)
+                {           
+                    var eventCoaching = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0",ID));
+                    _db.Delete("TB_EVENT", "ROWID", eventCoaching);
                     return Json(new { data = true }, JsonRequestBehavior.AllowGet);
                 }
             }

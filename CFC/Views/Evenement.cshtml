@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-6 margin-bottom-20px">
                     <label><i class="far fa-money margin-right-10px"></i> Url image</label>
-                    <input type="file" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
+                    <input type="text" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
                 </div>
             </div>
         </div>
@@ -97,48 +97,49 @@
         $("#tableEvents").jsGrid({
             width: "100%",
             height: "400px",
+            editing: false,
             sorting: true,
             paging: true,
             autoload: true,
+            selecting: true,
             rowClick: function (args) {
                 const id = args.item.ROWID;
                 ID = parseInt(id);
                 $.ajax({
                     url: '@Url.Action("EventCoaching", "RDV")',
                     method: "post",
-                    data: {ID : JSON.stringify(id)}
+                    data: { ID: JSON.stringify(id) }
                 }).done(function (retour) {
                     debugger;
-                    $("#selType").val(retour.TYPE);
-                    $("#txtNom").val(retour.NOM);
-                    $("#txtTitre").val(retour.TITRE);
-                    $("#txtDescription").val(retour.DESCRIPTION);
-                    $("#txtDescription").val(retour.DESCRIPTION);
-                    retour.ESTPAYANT ? $("#chkEstPayant").is(":checked", true) : $("#chkEstPayant").is(":checked", false);
-                    retour.ESTPUBLIER ? $("#chkEstPublier").is(":checked", true) : $("#chkEstPublier").is(":checked", false);
-                    $("#txtTarif").val(retour.TARIF);
-
-                    //$("#myPopUp").dialog({
-                    //    autoOpen: false,
-                    //    width: 850,
-                    //    title: "Modifier",
-                    //    buttons: [
-                    //        {
-                    //            text: "Enregistrer",
-                    //            click: function () {
-                    //                Enregistrer();
-                    //                $(this).dialog("close");
-                    //            }
-                    //        },
-                    //        {
-                    //            text: "Annuler",
-                    //            click: function () {
-                    //                $(this).dialog("close");
-                    //            }
-                    //        }
-                    //    ],
-                    //}).dialog("close");
-                 }).catch(error => console.log(error));
+                    $("#selType").val(retour.data.TYPE);
+                    $("#txtNom").val(retour.data.NOM);
+                    $("#txtTitre").val(retour.data.TITRE);
+                    $("#txtDescription").val(retour.data.DESCRIPTION);
+                    retour.data.ESTPAYANT ? $("#chkEstPayant").prop("checked",true) : $("#chkEstPayant").prop("checked",false);
+                    retour.data.ESTPUBLIER ? $("#chkEstPublier").prop("checked",true) : $("#chkEstPublier").prop("checked", false);
+                    $("#txtTarif").val(retour.data.TARIF);
+                    $("#myPopUp").dialog({
+                        autoOpen: false,
+                        width: 850,
+                        title: "Modifier",
+                        close: Effacer,
+                        buttons: [
+                            {
+                                text: "Enregistrer",
+                                click: function () {
+                                    Enregistrer();
+                                    $(this).dialog("close");
+                                }
+                            },
+                            {
+                                text: "Annuler",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        ],
+                    }).dialog("open");
+                });
             },
             controller: {
                 loadData: function () {
@@ -153,7 +154,18 @@
                     });
                     return d.promise();
                 },
-                deleteItem: $.noop
+                deleteItem: function (item) {
+                    debugger;
+                    $.ajax({
+                        url: '@Url.Action("SupprimerEventCoaching","RDV")',
+                        method: "post",
+                        data: {ID : JSON.stringify(item.ROWID)}
+                    }).done(function (retour) {
+                        if (retour.data.Etat) {
+                            $("#tableEvents").jsGrid("loadData");
+                        }
+                    }).catch(error => console.log(error));
+                }
             },
             fields: [
                 { name: "ROWID", type: Number, visible: false },
@@ -173,6 +185,18 @@
                     }
                 },
                 {
+                    title: "Liste des participants", width: 10,
+                    itemTemplate: function (args) {
+                        debugger;
+                        return $("<button class='btn btn-info'>Cliquez ici</button>").
+                            on("click", function (e) {
+                                e.preventDefault();
+                                const id = args[3].ROWID;
+                                alert(id);
+                            });
+                    }
+                },
+                {
                     type: "control",
                     modeSwitchButton: false,
                     width: 25,
@@ -184,6 +208,7 @@
                                     autoOpen: false,
                                     width: 850,
                                     title: "Nouveau",
+                                    close: Effacer,
                                     buttons: [
                                         {
                                             text: "Enregistrer",
@@ -212,12 +237,14 @@
     function Enregistrer() {
         const item = {
             rowid: ID,
+            type: parseInt($("#selType").val()),
             nom: $("#txtNom").val(),
             titre: $("#txtTitre").val(),
             description: $("#txtDescription").val(),
             estPayant: $("#chkEstPayant").is(":checked"),
             estPublier: $("#chkEstPublier").is(":checked"),
-            tarif: parseFloat($("#txtTarif").val())
+            tarif: parseFloat($("#txtTarif").val()),
+            urlImage: $("#inp_img").val()
         };
         debugger;
         $.ajax({
@@ -225,7 +252,22 @@
             method: "post",
             data: { value: JSON.stringify(item) }
         }).done(function (retour) {
-
+            if (retour.data.Etat) {
+                $("#myPopUp").dialog("close");
+                $("#tableEvents").jsGrid("loadData");
+            }
         }).catch(error => console.log(error));
+    }
+
+    function Effacer() {
+            $("#selType").val(0);
+            $("#txtNom").val("");
+            $("#txtTitre").val("");
+            $("#txtDescription").val("");
+            $("#chkEstPayant").prop("checked", false);
+            $("#chkEstPublier").prop("checked", false);
+            $("#txtTarif").val("");
+        $("#inp_img").val("");
+        ID = 0;
     }
 </script>
