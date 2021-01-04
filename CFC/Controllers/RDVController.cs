@@ -149,7 +149,7 @@ namespace CFC.Controllers
 
         #region Liste Participant ***by brice***
         [HttpGet]
-        public JsonResult ListeParticipants()
+        public JsonResult ListeParticipants(string id)
         {
             // _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT"));
             //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
@@ -219,5 +219,8 @@ namespace CFC.Controllers
             var ListeSecteur = _db.Fetch<SecteurDto>(sql);
             return Json(new { ok = true, liste = ListeSecteur.ToList() },JsonRequestBehavior.AllowGet);
         }
+
+
+     
     }
 }
