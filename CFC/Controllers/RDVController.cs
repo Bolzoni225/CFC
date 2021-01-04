@@ -49,7 +49,8 @@ namespace CFC.Controllers
                     NomEntreprise = RDV.NomEntreprise,
                     DateRDV = Convert.ToDateTime(RDV.DateRDV),
                     Fonction = RDV.Fonction,
-                    ObjetRDV = RDV.ObjetRDV
+                    ObjetRDV = RDV.ObjetRDV,
+                    idSecteur = Convert.ToInt32(RDV.idSecteur)
 
                 };
                 Sql sql = new Sql("SELECT TOP   1 * FROM TB_RDV ORDER BY ROWIDAUTO DESC");
@@ -88,11 +89,13 @@ namespace CFC.Controllers
 
         public JsonResult RDVUnique(string id)
         {
-            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV where rowidauto="+id);
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur FROM TB_RDV where rowidauto="+id);
             var liste = _db.Fetch<RdvDto>(sql);
+            Sql sqlSecteur = new Sql("SELECT * FROM TB_SECTEUR WHERE ID=" + liste.FirstOrDefault().idSecteur);
+            var secteur = _db.Fetch<SecteurDto>(sqlSecteur).FirstOrDefault().LibelleSecteur.ToString();
             Sql sqlMotif = new Sql("SELECT  LibelleMotif from TB_MOTIF WHERE IdRDV="+id);
             var ListeMotif = _db.Fetch<MotifDto>(sqlMotif);
-            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif }, JsonRequestBehavior.AllowGet);
+            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif, secteur = secteur }, JsonRequestBehavior.AllowGet);
         }
 
         #region Events / Coaching 
@@ -208,5 +211,13 @@ namespace CFC.Controllers
 
         }
         #endregion
+
+        [HttpGet]
+        public JsonResult Secteur()
+        {
+            Sql sql = new Sql("SELECT * FROM TB_SECTEUR");
+            var ListeSecteur = _db.Fetch<SecteurDto>(sql);
+            return Json(new { ok = true, liste = ListeSecteur.ToList() },JsonRequestBehavior.AllowGet);
+        }
     }
 }
