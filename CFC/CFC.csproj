@@ -2985,6 +2985,7 @@
     <Compile Include="Dto\RdvDto.cs" />
     <Compile Include="Dto\RdvModel.cs" />
     <Compile Include="Dto\SecteurDto.cs" />
+    <Compile Include="Dto\SmtpDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
