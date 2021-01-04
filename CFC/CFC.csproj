@@ -477,6 +477,7 @@
     <Content Include="assets\images\content\testi_img3.jpg" />
     <Content Include="assets\images\content\testi_img3test.jpg" />
     <Content Include="assets\images\content\tittle_bg.jpg" />
+    <Content Include="assets\images\expertisebancaire.jpg" />
     <Content Include="assets\images\header\advisory-e1458825276823.jpg" />
     <Content Include="assets\images\header\bitcoin-globe.gif" />
     <Content Include="assets\images\header\colleagues-437019_1280.jpg" />
@@ -490,6 +491,7 @@
     <Content Include="assets\images\header\slider_img-3.jpg" />
     <Content Include="assets\images\header\slider_img-3test.jpg" />
     <Content Include="assets\images\header\slider_img.jpg" />
+    <Content Include="assets\images\management.jpg" />
     <Content Include="assets\images\moovmoney.png" />
     <Content Include="assets\images\omoney_logo.png" />
     <Content Include="assets\images\parteners_CFC\img1.png" />
@@ -507,6 +509,7 @@
     <Content Include="assets\images\parteners_CFC\img7.png" />
     <Content Include="assets\images\parteners_CFC\img8.png" />
     <Content Include="assets\images\parteners_CFC\img9.png" />
+    <Content Include="assets\images\strategie.jpg" />
     <Content Include="assets\jQuery-3.3.1\jquery-3.3.1.js" />
     <Content Include="assets\jQuery-3.3.1\jquery-3.3.1.min.js" />
     <Content Include="assets\js\bit_timer.js" />
@@ -3167,6 +3170,9 @@
     <Content Include="Views\Echec.cshtml" />
     <Content Include="Views\Liste_Rdv.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\PageServiceBancaire.cshtml" />
+    <Content Include="Views\PageStrategie.cshtml" />
+    <Content Include="Views\PageManagement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
