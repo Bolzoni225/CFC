@@ -17,6 +17,6 @@ namespace CFC.Dto
         public int TYPE { get; set; }   
         public string LIEU { get; set; }  
         public DateTime? DATE_HEURE { get; set; }  
-        public string URL_IMAGE { get; set; }  
+        public string URLIMAGE { get; set; }    
     }
 }

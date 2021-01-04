@@ -29,6 +29,68 @@
     </div>
 </div>
 
+<div id="myPopUp">
+    <div class="row">
+        <!-- Demande item -->
+        <div class="background-grey thum-hover full-width  padding-top-20px">
+
+            VEUILLEZ REMPLIR CE FORMULAIRE POUR CREER UN EVENEMENT OU UN COACHING
+            <br /><br />
+            <hr class="margin-tb-5px">
+
+            <div class="row padding-right-45px">
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-question-circle margin-right-10px"></i>  Type</label>
+                    <select class="selectpicker form-control" id="selType">
+                        <option value="0" disabled selected>--Sélectionner--</option>
+                        <option value="1">Evènement</option>
+                        <option value="2">Coaching</option>
+                    </select>
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-user margin-right-10px"></i> Nom</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nom" id="txtNom">
+                </div>
+            </div>
+
+            <div class="row padding-right-45px">
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Titre" id="txtTitre">
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
+                    <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching" id="txtDescription"></textarea>
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPayant">
+                        Est payant
+                    </label>
+                </div>
+                <div class="col-md-6 margin-bottom-20px checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPublier">
+                        Publier
+                    </label>
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Tarif" id="txtTarif">
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-money margin-right-10px"></i> Url image</label>
+                    <input type="file" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
+                </div>
+            </div>
+        </div>
+        <!-- // Demande item -->
+
+    </div>
+</div>
+
 <script>
     let ID = 0;
     $(function () {
@@ -143,7 +205,8 @@
                 }
             ]
         });
-    });
+        $("#myPopUp").dialog({ autoOpen: false }).dialog("close");
+});
 
 
     function Enregistrer() {
@@ -152,11 +215,11 @@
             nom: $("#txtNom").val(),
             titre: $("#txtTitre").val(),
             description: $("#txtDescription").val(),
-            estPayant: $("#chkPayant").is(":checked"),
-            estPublier: $("#chkPublier").is(":checked"),
+            estPayant: $("#chkEstPayant").is(":checked"),
+            estPublier: $("#chkEstPublier").is(":checked"),
             tarif: parseFloat($("#txtTarif").val())
         };
-
+        debugger;
         $.ajax({
             url: '@Url.Action("AjouterEventCoaching","RDV")',
             method: "post",
@@ -166,66 +229,3 @@
         }).catch(error => console.log(error));
     }
 </script>
-
-
-<div id="myPopUp">
-    <div class="row">
-        <!-- Demande item -->
-        <div class="background-grey thum-hover full-width  padding-top-20px">
-
-            VEUILLEZ REMPLIR CE FORMULAIRE POUR CREER UN EVENEMENT OU UN COACHING
-            <br /><br />
-            <hr class="margin-tb-5px">
-
-            <div class="row padding-right-45px">
-                <div class="col-md-6 margin-bottom-20px">
-                    <label><i class="far fa-question-circle margin-right-10px"></i>  Type</label>
-                    <select class="selectpicker form-control" id="selType">
-                        <option value="0" disabled selected>--Sélectionner--</option>
-                        <option value="1">Evènement</option>
-                        <option value="2">Coaching</option>
-                    </select>
-                </div>
-                <div class="col-md-6 margin-bottom-20px">
-                    <label><i class="far fa-user margin-right-10px"></i> Nom</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nom" id="txtNom">
-                </div>
-            </div>
-
-            <div class="row padding-right-45px">
-                <div class="col-md-6 margin-bottom-20px">
-                    <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Titre" id="txtTitre">
-                </div>
-                <div class="col-md-6 margin-bottom-20px">
-                    <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
-                    <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching" id="txtDescription"></textarea>
-                </div>
-
-                <div class="col-md-6 margin-bottom-20px checkbox">
-                    <label>
-                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPayant">
-                        Est payant
-                    </label>
-                </div>
-                <div class="col-md-6 margin-bottom-20px checkbox">
-                    <label>
-                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPublier">
-                        Publier
-                    </label>
-                </div>
-
-                <div class="col-md-6 margin-bottom-20px">
-                    <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Tarif" id="txtTarif">
-                </div>
-                <div class="col-md-6 margin-bottom-20px">
-                    <label><i class="far fa-money margin-right-10px"></i> Url image</label>
-                    <input type="file" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
-                </div>
-            </div>
-        </div>
-        <!-- // Demande item -->
-
-    </div>
-</div>
