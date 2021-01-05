@@ -13,6 +13,7 @@ using CFC.Dto;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
+
 namespace CFC.Controllers
 {
     public class RDVController : SurfaceController
@@ -155,7 +156,8 @@ namespace CFC.Controllers
             //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
             try
             {
-                var liste = _db.Fetch<ParticipantDto>(new Sql().Select("*").From("TB_PARTICPANT"));
+                Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + id);
+                var liste = _db.Fetch<ParticipantDto>(sql);
                 return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
 
             }
@@ -219,6 +221,15 @@ namespace CFC.Controllers
             var ListeSecteur = _db.Fetch<SecteurDto>(sql);
             return Json(new { ok = true, liste = ListeSecteur.ToList() },JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult MethodePassage()
+        {
+
+            var url = Request.Url.GetLeftPart(UriPartial.Authority);
+            //tu peux faire passer les parametres ici et les communiquer à la vue soit avec un viewbag ou un viewdata
+            return Redirect(url + "/ListeParticipant");
+        }
+    }
 
 
      
