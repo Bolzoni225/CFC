@@ -13,6 +13,7 @@ using CFC.Dto;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
+
 namespace CFC.Controllers
 {
     public class RDVController : SurfaceController
@@ -49,7 +50,8 @@ namespace CFC.Controllers
                     NomEntreprise = RDV.NomEntreprise,
                     DateRDV = Convert.ToDateTime(RDV.DateRDV),
                     Fonction = RDV.Fonction,
-                    ObjetRDV = RDV.ObjetRDV
+                    ObjetRDV = RDV.ObjetRDV,
+                    idSecteur = Convert.ToInt32(RDV.idSecteur)
 
                 };
                 Sql sql = new Sql("SELECT TOP   1 * FROM TB_RDV ORDER BY ROWIDAUTO DESC");
@@ -88,11 +90,13 @@ namespace CFC.Controllers
 
         public JsonResult RDVUnique(string id)
         {
-            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV where rowidauto="+id);
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur FROM TB_RDV where rowidauto="+id);
             var liste = _db.Fetch<RdvDto>(sql);
+            Sql sqlSecteur = new Sql("SELECT * FROM TB_SECTEUR WHERE ID=" + liste.FirstOrDefault().idSecteur);
+            var secteur = _db.Fetch<SecteurDto>(sqlSecteur).FirstOrDefault().LibelleSecteur.ToString();
             Sql sqlMotif = new Sql("SELECT  LibelleMotif from TB_MOTIF WHERE IdRDV="+id);
             var ListeMotif = _db.Fetch<MotifDto>(sqlMotif);
-            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif }, JsonRequestBehavior.AllowGet);
+            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif, secteur = secteur }, JsonRequestBehavior.AllowGet);
         }
 
         #region Events / Coaching 
@@ -146,13 +150,14 @@ namespace CFC.Controllers
 
         #region Liste Participant ***by brice***
         [HttpGet]
-        public JsonResult ListeParticipants()
+        public JsonResult ListeParticipants(string id)
         {
             // _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT"));
             //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
             try
             {
-                var liste = _db.Fetch<ParticipantDto>(new Sql().Select("*").From("TB_PARTICPANT"));
+                Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + id);
+                var liste = _db.Fetch<ParticipantDto>(sql);
                 return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
 
             }
@@ -208,5 +213,25 @@ namespace CFC.Controllers
 
         }
         #endregion
+
+        [HttpGet]
+        public JsonResult Secteur()
+        {
+            Sql sql = new Sql("SELECT * FROM TB_SECTEUR");
+            var ListeSecteur = _db.Fetch<SecteurDto>(sql);
+            return Json(new { ok = true, liste = ListeSecteur.ToList() },JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MethodePassage()
+        {
+
+            var url = Request.Url.GetLeftPart(UriPartial.Authority);
+            //tu peux faire passer les parametres ici et les communiquer à la vue soit avec un viewbag ou un viewdata
+            return Redirect(url + "/ListeParticipant");
+        }
+    }
+
+
+     
     }
 }

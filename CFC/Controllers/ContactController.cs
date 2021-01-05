@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CFC.Dto;
+using NPoco;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -11,20 +14,37 @@ namespace CFC.Controllers
 {
     public class ContactController : SurfaceController
     {
+        private Database _db;
+        public ContactController()
+        {
+            _db = new Database(ConfigurationManager.ConnectionStrings["cfcFinances"].ConnectionString, ConfigurationManager.ConnectionStrings["cfcFinances"].ProviderName);
+        }
+
+
         [HttpPost]
        public ActionResult SendMail(FormCollection Form)
         {
+            var url = Request.Url.GetLeftPart(UriPartial.Authority);
+            try
+            {
+                Sql sql = new Sql("SELECT * FROM TB_SMTP");
+            var ParametreSmtp = _db.Fetch<SmtpDto>(sql).FirstOrDefault();
+
+
+
+
             string email = Form["email"].ToString();
             string phone = Form["phone"].ToString();
             string objet = Form["objet"].ToString();
             string message = Form["message"].ToString();
+            message = message + "\n\n\n" + "Numéro de Téléphone " + phone;
 
             var client = new SmtpClient() {
                 UseDefaultCredentials = false,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential("cfc@test.com", "123456"),
-                Host = "localhost",
-                Port = 25,
+                Credentials = new NetworkCredential(ParametreSmtp.NomUtilisateur, ParametreSmtp.Mdp),
+                Host =ParametreSmtp.NomServeur,
+                Port = Convert.ToInt32(ParametreSmtp.Port),
                 EnableSsl = false
             };
             //client.Port = 25;
@@ -35,10 +55,9 @@ namespace CFC.Controllers
             MailMessage mailMessage = new MailMessage(email,"user2@test.com");
             mailMessage.Subject = objet;
             mailMessage.Body = message;
-            try
-            {
+          
                 client.Send(mailMessage);
-                var url = Request.Url.GetLeftPart(UriPartial.Authority);
+                
                 return Redirect(url+"/success");
                 
 
@@ -46,7 +65,7 @@ namespace CFC.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                return Redirect(url + "/Echec");
             }
 
             return null;

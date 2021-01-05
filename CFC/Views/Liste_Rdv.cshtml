@@ -6,7 +6,9 @@
 
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css" />
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css" />*@
+<link rel="stylesheet" href="~/assets/DataTables/DataTables-1.10.23/css/dataTables.bootstrap.css" />
+<link rel="stylesheet" href="~/assets/DataTables/DataTables-1.10.23/css/jquery.dataTables.css" />
 
 
     <div class="container-fluid overflow-hidden">
@@ -111,15 +113,22 @@
 
                         </div>
 
-                      
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Secteur d'activité</label>
+                            <input type="text" class="form-control form-control-sm" id="activite" placeholder="" readonly>
+
+                        </div>
+
+
 
                     </div>
-                    <div class="row col-lg-12 col-md-12">
+                    <div class="margin-tb-30px full-width">
 
 
                         <table id="tbmotif" class="table width-100px">
                             <thead>
                                 <tr>
+                                    <td></td>
                                     <td>Motifs</td>
                                 </tr>
 
@@ -156,8 +165,10 @@
 
 
 
-    <script src="~/assets/js/jquery.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+    @*<script src="~/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>*@
+@*<script src="~/assets/jQuery-3.3.1/jquery-3.3.1.min.js"></script>*@
+@*<script src="~/assets/DataTables/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>*@
 
     <script>
         $(document).ready(function () {
@@ -179,6 +190,7 @@
             });
             var tbMotif = $('#tbmotif').DataTable({
                 columns: [
+                    {"data" : "ID"},
                     { "data": "motif" }
                    ],
                 columnDefs: [
@@ -201,7 +213,7 @@
                                 "NomDem": n.NomDemandeur + ' ' + n.PrenomsDemandeur,
                                 "Telephone": n.Telephone,
                                 "Description": n.DescriptionMotif,
-                                "ACTION": '<td><a class= "btn btn-primary" href="#" > <i class="fas fa-edit"></i></a><a class="btn btn-info" href="#" id="details"><i class="fas fa-eye"></i></a></td >'
+                                "ACTION": '<td><a class="btn btn-info" href="#" id="details"><i class="fas fa-eye"></i></a></td >'
                             }]).draw();
                         });
                     }
@@ -233,6 +245,7 @@
                     data: { "id": JSON.stringify(idRdv) },
                     success: function (res) {
                         debugger
+                        
                         if (res.ok == true) {
                             $.each(res.liste, function (i, n) {
                                 debugger
@@ -245,9 +258,11 @@
                                 $("#Annec").val(n.AnneeConstitution);
                                 $("#CA").val(n.ChiffreAffaire);
                                 $("#Objet").val(n.ObjetRDV);
+                                $("#activite").val(res.secteur);
                                 $.each(res.ListMotif, function (i, t) {
                                   debugger
                                     tbMotif.rows.add([{
+                                        "ID" : i+1,
                                             "motif": t.LibelleMotif,
                                            
                                         }]).draw();
@@ -266,6 +281,7 @@
                 return false;
 
             });
+
 
            
         });
