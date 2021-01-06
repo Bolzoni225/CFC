@@ -2,8 +2,10 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "Layout_app.cshtml";
+    int ID = Convert.ToInt32(TempData["ROWID"]);
 }
 
+<input type="hidden" id="rowId" value="@ID" />
 <div class="container-fluid overflow-hidden">
     <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
         <!-- Page Title -->
@@ -21,60 +23,63 @@
         <div class="margin-tb-45px full-width">
 
             <!-- Demande item -->
-            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-left-45px padding-top-20px">
-
-                LA LISTE DES PARTICIPANTS
-                <br /><br />
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">NOM</th>
-                            <th scope="col">TITRE/FONCT°</th>
-                            <th scope="col">TELEPHONE</th>
-                            <th scope="col">ENTREPRISE</th>
-                            <th scope="col">EMAIL</th>
-                            <th scope="col">ANNEE DE CONSTITUTION</th>
-                            @*<th scope="col">SECTEUR ACTIVITE</th>*@
-                            <th scope="col">OBJET</th>
-                            <th scope="col">ADRESSE GEO</th>
-                            @*<th scope="col">ACTION</th>*@
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @*<tr>
-                            <th scope="row">Test</th>
-                            <td>Informaticien</td>
-                            <td>01020102</td>
-                            <td>As Consulting</td>
-                            <td>test@gmail.com</td>
-                            <td>2012</td>
-                            <td>Informatique</td>
-                            <td>Test</td>
-                            <td>Cocody</td>
-                            <td>
-                                <a class="btn btn-primary" href="#"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-info" href="#"><i class="fas fa-eye"></i></a>
-                            </td>
-
-                        </tr>*@
-                    </tbody>
-                </table>
-
+            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-top-20px">
+                @*LA LISTE DES PARTICIPANTS
+                <br /><br />*@
+                <div class="col-12" id="tableParticipants"></div>
             </div>
+            
             <!-- // Demande item -->
 
         </div>
     </div>
 </div>
 
-<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
-<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>
+@*<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>*@
 <script>
-    $(document).ready(function () {
+    $(function () {
         //swal("Attention", "Alert", "error");
-        charger_donnees();
+        //debugger;
+        //charger_donnees();
+        $("#tableParticipants").jsGrid({
+            width: "100%",
+            paging: true,
+            editing: false,
+            autoload: true,
+            controller: {
+                loadData: function() {
+                    const d = $.Deferred();
+                    $.ajax({
+                        url: '@Url.Action("ListeParticipants","RDV")',
+                        method: 'post',
+                        data: { jsonObject: $("#rowId").val()}
+                    }).done(function (retour) {
+                        debugger;
+                        const result = retour.data.length > 0 ? retour.data : [];
+                        d.resolve(result);
+                    });
+                    return d.promise();
+                }
+            },
+            fields: [
+                { name:"NomPrenoms",title:"Nom & prénoms", type: "text", width: 15 },
+                { name:"Titre",title:"Titre", type: "text", width: 15 },
+                { name:"Telephone",title:"Téléphone", type: "text", width: 15 },
+                { name:"NomEts",title:"Etablissement", type: "text",width: 15 },
+                { name:"email",title:"E-mail", type: "text", width: 15 },
+                { name:"AnneeConstitution",title:"Date de création", type: "text", width: 15 },
+                { name:"objet",title:"Objet", type: "text", width: 15 },
+                { name:"Adressegeographique",title:"Adresse géographique", type: "text", width: 15 }
+            ]
+
+        });
+        
     });
+
+
+
+
 
     function charger_donnees() {
         //$("#staticBackdrop").modal("show");
@@ -85,11 +90,11 @@
         //};
         
         $.ajax({
-            type: 'GET',
+            method: 'post',
             url: '@Url.Action("ListeParticipants", "RDV")',
-            //data: { jsonObject: JSON.stringify(operation) },
-            dataType: "json",
+            data: { jsonObject: JSON.stringify($("#rowId").val())},
             success: function (data) {
+                debugger;
                 $("tbody").html("");
                 if (data.ok == true) {
                     if (data.data.length > 0) {
@@ -124,10 +129,8 @@
                 }
             },
             error: function (msg) {
-                swal("Attention", data.message, "error");
-
+                //swal("Attention", data.message, "error");
             }
-
         });
     }
     
