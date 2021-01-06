@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
+
 namespace CFC.Controllers
 {
     public class RDVController : SurfaceController
@@ -29,9 +30,14 @@ namespace CFC.Controllers
         }
 
 
+
         [HttpPost]
-        public ActionResult DemandeRdv(FormCollection Data)
+        public JsonResult DemandeRdv(string value)
         {
+
+            var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
+            string url = string.Empty;
+
             try
             {
                 var nom = Data["Nom"];
@@ -47,17 +53,23 @@ namespace CFC.Controllers
 
                 var NewEvent = new RdvDto()
                 {
-                    AnneeConstitution = anneeconstitution,
-                    ChiffreAffaire = chiffreAffaire,
-                    DescriptionMotif = description,
-                    Email = mail,
-                    NomDemandeur = nom,
-                    PrenomsDemandeur = prenoms,
-                    Telephone = phone,
-                    NomEntreprise = nomets,
-                    DateRDV = DateTime.Now
+                    AnneeConstitution = RDV.AnneeConstitution,
+                    ChiffreAffaire = RDV.ChiffreAffaire,
+                    DescriptionMotif = RDV.DescriptionMotif,
+                    Email = RDV.Email,
+                    NomDemandeur = RDV.NomDemandeur,
+                    PrenomsDemandeur = RDV.PrenomsDemandeur,
+                    Telephone = RDV.Telephone,
+                    NomEntreprise = RDV.NomEntreprise,
+                    DateRDV = Convert.ToDateTime(RDV.DateRDV),
+                    Fonction = RDV.Fonction,
+                    ObjetRDV = RDV.ObjetRDV,
+                    idSecteur = Convert.ToInt32(RDV.idSecteur)
 
                 };
+                Sql sql = new Sql("SELECT TOP   1 * FROM TB_RDV ORDER BY ROWIDAUTO DESC");
+                _db.Insert<RdvDto>("TB_RDV", "RowidAuto", NewEvent);
+                var lastRDV = _db.Fetch<RdvDto>(sql).First().RowidAuto;
 
                 _db.Insert<RdvDto>("TB_RDV", "ROWID", NewEvent);
                 var url = Request.Url.GetLeftPart(UriPartial.Authority);
@@ -328,6 +340,115 @@ namespace CFC.Controllers
             }
             catch (Exception ex)
             {
+                url = url + "/Echec";
+                return Json(new { ok = true, chemin = url }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        [HttpGet]
+       public JsonResult ListeRDV()
+        {
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV");
+            var liste = _db.Fetch<RdvDto>(sql);
+            return Json(new { ok = true, liste = liste.ToList() }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RDVUnique(string id)
+        {
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur FROM TB_RDV where rowidauto="+id);
+            var liste = _db.Fetch<RdvDto>(sql);
+            Sql sqlSecteur = new Sql("SELECT * FROM TB_SECTEUR WHERE ID=" + liste.FirstOrDefault().idSecteur);
+            var secteur = _db.Fetch<SecteurDto>(sqlSecteur).FirstOrDefault().LibelleSecteur.ToString();
+            Sql sqlMotif = new Sql("SELECT  LibelleMotif from TB_MOTIF WHERE IdRDV="+id);
+            var ListeMotif = _db.Fetch<MotifDto>(sqlMotif);
+            return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif, secteur = secteur }, JsonRequestBehavior.AllowGet);
+        }
+
+        #region Events / Coaching 
+        public async Task<JsonResult> ListeEventsCoaching()
+        {
+            var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+            return Json(new { data = liste }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AjouterEventCoaching(string value)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var eventCoaching = JsonConvert.DeserializeObject<EventDto>(value);
+                    await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                    return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> EventCoaching(int ID)
+        {
+            try
+            {
+                if (ID > 0)
+                {
+                    var eventCoaching = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", ID));
+                    return Json(new { data = eventCoaching }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        #endregion
+
+
+        #region Liste Participant ***by brice***
+        [HttpGet]
+        public JsonResult ListeParticipants(string id)
+        {
+            // _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+            //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+            try
+            {
+                Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + id);
+                var liste = _db.Fetch<ParticipantDto>(sql);
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        #endregion
+
+        #region News Events ***by brice***
+        [HttpGet]
+        public JsonResult NewsEvents()
+        {
+            //var liste = _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ESTPUBLIER = @estPublier", "ESTPAYANT = @estPayant", new { estPublier = false, estPayant = true }));
+
+            try
+            {
+                var liste = _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ESTPUBLIER = @estPublier", new { estPublier = true }));
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
                 var message = ex.Message;
                 return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
@@ -357,5 +478,25 @@ namespace CFC.Controllers
 
         }
         #endregion
+
+        [HttpGet]
+        public JsonResult Secteur()
+        {
+            Sql sql = new Sql("SELECT * FROM TB_SECTEUR");
+            var ListeSecteur = _db.Fetch<SecteurDto>(sql);
+            return Json(new { ok = true, liste = ListeSecteur.ToList() },JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MethodePassage()
+        {
+
+            var url = Request.Url.GetLeftPart(UriPartial.Authority);
+            //tu peux faire passer les parametres ici et les communiquer à la vue soit avec un viewbag ou un viewdata
+            return Redirect(url + "/ListeParticipant");
+        }
+    }
+
+
+     
     }
 }

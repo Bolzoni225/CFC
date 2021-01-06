@@ -20,6 +20,7 @@ namespace CFC.Dto
         public string DescriptionMotif { get; set; }
         public DateTime DateRDV {get;set;}
        public int RowidAuto { get; set; }
+        public int idSecteur { get; set; }
         
 	
     }

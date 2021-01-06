@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <title>Tabib HTML5 Health Directory Template</title>
+    <title>CFC FINANCES - BACKOFFICE</title>
     <meta name="author" content="Nile-Theme">
     <meta name="robots" content="index follow">
     <meta name="googlebot" content="index follow">
@@ -39,6 +39,12 @@
     <link rel="stylesheet" href="~/assets/adminAssets/css/elegant_icon.css">
     <!-- admin style -->
     <link rel="stylesheet" href="~/assets/adminAssets/css/sb-admin.css">
+    <!-- jsGrid style & theme-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+
+    <!--Jquery ui-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- jquery library  -->
     <script src="~/assets/adminAssets/js/jquery-3.2.1.min.js"></script>
     <!-- fontawesome  -->
@@ -46,7 +52,6 @@
 
 </head>
 <body>
-
     <style>
         .switch {
             position: relative;
@@ -113,18 +118,18 @@
         <nav class="container-fluid header-in">
             <div class="row">
                 <div class="col-lg-2 col-md-12">
-                    <a id="logo" href="accueil" class="d-inline-block margin-tb-15px"><img src="~/assets/images/header/logo.png" alt="" width="100" height="60" ></a>
+                    <a id="logo" href="accueil" class="d-inline-block margin-tb-15px"><img src="~/assets/images/header/logo.png" alt="" width="100" height="60"></a>
                     <a class="mobile-toggle padding-13px background-main-color" href="#"><i class="fas fa-bars"></i></a>
                 </div>
                 <div class="col-lg-9 col-md-12 position-inherit">
                     <ul id="menu-main" class="nav-menu float-lg-right link-padding-tb-20px">
                         @*<li>
-                            <a href="accueil">Accueil</a>
-                        </li>
-                        <li>
-                            <a href="#">Nos Services</a>
-                        </li>
-                        <li><a href="page-contact-us.html">Contactez-Nous</a></li>*@
+                                <a href="accueil">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="#">Nos Services</a>
+                            </li>
+                            <li><a href="page-contact-us.html">Contactez-Nous</a></li>*@
                         <li class="margin-left-20px">
                             <a href="profil"><img src="http://placehold.it/60x60" class="height-30px border-radius-30" alt="">@*@currentUser.Nomutilisateur*@</a>
                         </li>
@@ -160,21 +165,15 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Favorites">
                     <a class="nav-link" href="evenement">
                         <i class="fa fa-fw fa-plus"></i>
-                        <span class="nav-link-text">Créer un évènement</span>
+                        <span class="nav-link-text">Evènement & Coaching</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="listeEvenement">
-                        <i class="fa fa-fw fa-list-alt"></i>
-                        <span class="nav-link-text">Liste des evenements</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="listeParticipant">
-                        <i class="fa fa-fw fa-list-alt"></i>
-                        <span class="nav-link-text">Liste des participants</span>
-                    </a>
-                </li>
+                        <a class="nav-link" href="liste_rdv">
+                            <i class="fa fa-fw fa-list-alt"></i>
+                            <span class="nav-link-text">Liste des RDV</span>
+                        </a>
+                    </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My items">
                     <a class="nav-link" href="notifications">
                         <i class="fa fa-fw fa-table"></i>
@@ -227,7 +226,11 @@
         </a>
     </div>
 
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="~/assets/DataTables/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/assets/adminAssets/js/sticky-sidebar.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
     <script src="~/assets/adminAssets/js/YouTubePopUp.jquery.js"></script>
     <script src="~/assets/adminAssets/js/owl.carousel.min.js"></script>
     <script src="~/assets/adminAssets/js/imagesloaded.min.js"></script>
