@@ -44,9 +44,9 @@
     <div class="btc_tittle_img_overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 full_width">
+            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 full_width">
                 <div class="btc_tittle_left_heading">
-                    <h1>Participer à l'évènement</h1>
+                    <h1>Participer à l'évènement <i style="color:#ff880e;"> @NOM</i> </h1>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <div class="col-lg-6">
-                    <div class="divider_30">
+                    <div class="">
                         <div class="cal-convertor">
                             <div class="form-group">
 
@@ -73,13 +73,13 @@
                             </div>
                             <div class="form-group">
 
-                                <label class="control-label"> Titre Fonction</label>
-                                <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
+                                <label class="control-label"> Titre/ Fonction</label>
+                                <input type="text" id="fonction" name="fonction" class="form-control">
                             </div>
                             <div class="form-group">
 
                                 <label class="control-label"> Téléphone</label>
-                                <input type="tel" id="phone" name="phone" class="form-control">
+                                <input type="tel" id="telephone" name="telephone" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="control-label"> Email</label>
@@ -90,28 +90,31 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="divider_30">
+                    <div class="">
                         <div class="cal-convertor">
                             <div class="cal-convertor">
                                 <div class="form-group">
 
                                     <label class="control-label"> Nom Entreprise</label>
-                                    <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
+                                    <input type="text" id="nomentreprise" name="nomentreprise" class="form-control">
 
                                 </div>
                                 <div class="form-group">
 
                                     <label class="control-label"> Année constitution</label>
-                                    <input type="text" id="nomprenoms" name="nomprenoms" class="form-control">
+                                    <input type="text" id="anneeconstitution" name="anneeconstitution" class="form-control">
                                 </div>
                                 <div class="form-group">
 
                                     <label class="control-label"> Secteur d'activité</label>
-                                    <input type="tel" id="phone" name="phone" class="form-control">
+                                    @*<input type="tel" id="secteuractivite" name="secteuractivite" class="form-control">*@
+                                    <select class=" form-control" id="secteuractivite">
+                                        <option selected disabled>--Secteur d'activité--</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label"> Adresse géographique</label>
-                                    <input type="email" id="email" name="email" class="form-control">
+                                    <input type="email" id="adresse" name="adresse" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -134,12 +137,12 @@
                     <h1 class="text-center">UTILISER LES MOYENS DE PAIEMENTS ELECTRONIQUE POUR RESERVER VOTRE PLACE</h1>
                     <div class="row text-center">
                         <label>
-                            <input type="radio" name="test" value="small" checked>
+                            <input type="radio" id="Orange" name="test" value="1" checked>
                             <img src="~/assets/images/omoney_logo.png">
                         </label>
 
                         <label>
-                            <input type="radio" name="test" value="big">
+                            <input type="radio" id="Moov" name="test" value="2">
                             <img src="~/assets/images/moovmoney.png">
                         </label>
                     </div>
@@ -150,12 +153,168 @@
     }
 }
 
-
 <div class="btc_video_main_wrapper">
     <div class="container">
 
         <div class="row btc_video_center_wrapper text-center">
-            <button class="btn btn-lg" type="submit">RESERVER MA PLACE</button>
+            <button class="btn btn-lg" onclick="btnsubmit()">RESERVER MA PLACE</button>
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticPaiement" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <input type="hidden" id="OrderId" />
+        <div class="modal-content">
+            <iframe class="modal-body col-lg-12" id="iframePaiement"
+                    title="Paiement Mobile"
+                    @*width="500"*@
+                    height="550"
+                    src="https://webpayment.orange-money.com/ci/mpayment/abstract/v1dmkzexdbjhsdflnjxs2wvd8vrnfeqaplfy10gidicvnrbev14zeid1nfnyyxzr"></iframe>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" onclick="btnFermer()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/adminAssets/js/jquery-3.2.1.min.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        GetAllSecteurActivite();
+    });
+    //Get all Secteur Activite
+    function GetAllSecteurActivite() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ListeSecteurActivite", "RDV")',
+            success: function (data) {
+                $.each(data.data, function (i, val) {
+                    var line = '<option value=' + val.ID + '>' + val.LibelleSecteur + '</option>'
+                    $("#secteuractivite").append(line);
+                });
+            }
+
+        });
+    }
+
+
+    $('#Moov').click(function () {
+        if ($('#Orange').is(':checked') == true) {
+            $(':checkbox#Orange').prop('checked', false);
+        }
+    });
+    $('#Orange').click(function () {
+        if ($('#Moov').is(':checked') == true) {
+            $(':checkbox#Moov').prop('checked', false);
+        }
+    });
+
+
+    //fonction pour ajouter un element construit par objet
+    function btnsubmit() {
+        var checkOperateur = 0;
+        $('input[type="radio"]:checked').each(function (i) {
+            checkOperateur = $(this).val();
+        });
+
+        //alert(checkOperateur);
+        //debugger;
+        @*var resp = VerifInput();
+        if (resp.succes == true && '@ROWID' != "") {
+            $("#Valider").html('<i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i> Validation...');*@
+            var operation = {
+                NomPrenoms: $("#nomprenoms").val(),
+                Titre: $("#fonction").val(),
+                Telephone: $("#telephone").val(),
+                email: $("#email").val(),
+
+                NomEts: $("#nomentreprise").val(),
+                AnneeConstitution: $("#anneeconstitution").val(),
+                Id_Secteur: $("#secteuractivite").val(),
+                Adressegeographique: $("#adresse").val()
+            };
+
+            //alert(JSON.stringify(operation));
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddParticipant", "RDV")',
+                data: { jsonObject: JSON.stringify(operation), Operateur: checkOperateur},
+                dataType: "json",
+                success: function (data) {
+                    if (data.ok == true) {
+                        if (data.aPayer == 1) {
+                            $("#OrderId").val(data.data.orderId);
+                            $('#iframePaiement').attr('src', data.data.payment_url);
+
+                            $("#Payer").html('Payer');
+                            $("#staticPaiement").modal("show");
+                        } else {
+                            swal("Succès", data.message, "success").then(function (result) {
+                                window.location.href = "/Accueil";
+                            });
+                        }
+                    }
+                    else {
+                        $("#Payer").html('Payer');
+                        swal("Attention", data.message, "error");
+                    }
+                },
+                error: function (msg) {
+                    $("#Valider").html('Valider');
+                    swal("Ooups!!!", "code erreur 404 ", "error");
+
+                }
+
+            });
+        //}
+    }
+
+    function btnFermer() {
+        //$("#staticPaiement").modal("hide");
+        var checkOperateur = 0;
+        $('input[type="radio"]:checked').each(function (i) {
+            checkOperateur = $(this).val();
+        });
+
+        if (checkOperateur != 0) {
+            var operation = {
+                operateur: checkOperateur,
+                OrderId: $("#OrderId").val()
+            };
+
+            //alert(JSON.stringify(operation));
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetStatutPaiement", "RDV")',
+                data: { jsonObject: JSON.stringify(operation) },
+                dataType: "json",
+                success: function (data) {
+                    if (data.ok == true) {
+                        swal("Succès", data.message, "success").then(function (result) {
+                            $("#staticPaiement").modal("hide");
+                            window.location.href = "/Accueil";
+                        });
+                    } else {
+                        swal("Echec", data.message, "warning").then(function (result) {
+                            $("#staticPaiement").modal("hide");
+                            window.location.href = "/Accueil";
+                        });
+                    }
+                },
+                error: function (msg) {
+
+                    swal("Ooups!!!", "code erreur 404.", "error");
+
+                }
+
+            });
+        } else {
+            swal("Attention !", "Précisez l'opérateur svp.", "warning");
+        }
+
+    }
+</script>
