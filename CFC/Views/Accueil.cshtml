@@ -690,6 +690,7 @@
     $(document).ready(function () {
         //swal("Attention", "Alert", "error");
         charger_donnees();
+
     });
 
     function charger_donnees() {
@@ -711,14 +712,16 @@
                                 estPayant = "PAYANT";
                             }
 
+                            var date = ConvertDate(val.DATE_HEURE);
+
                             var line = '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">'
                                 + '<div class="btc_blog_indx_box_wrapper">'
                                 + '<div class="btc_blog_indx_img_wrapper">'
                                 + '<img src="' + image + '" alt="blog_img">'
                                     + '<div class="btc_blog_indx_date_wrapper">'
                                     + '<ul>'
-                                    + '<li>' + val.NOM + '</li>'
-                                    + '<li>' + val.Titre + '</li>'
+                                    + '<li>' + date.JOUR + '</li>'
+                                    + '<li>' + date.MOIS + '</li>'
                                     + '</ul>'
                                     + '</div>'
                                     + '</div>'
@@ -734,7 +737,7 @@
                                     + '</div>'
 
                                 + '<div class="btc_blog_indx_cont_bottom_right">'
-                                + '<p><i class="fa fa-user"></i> &nbsp;<a style="color:#ff880e;" onclick="participer(\'' + val.ROWID + '\', \'' + val.NOM + '\',\'' + val.TITRE + '\', \'' + val.ESTPAYANT + '\', \'' + val.TARIF + '\')">PARTICIPER</a></p>'
+                                + '<p><i class="fa fa-user"></i> &nbsp;<a style="color:#ff880e; cursor:pointer" onclick="participer(\'' + val.ROWID + '\', \'' + val.NOM + '\',\'' + val.TITRE + '\', \'' + val.ESTPAYANT + '\', \'' + val.TARIF + '\')">PARTICIPER</a></p>'
                                     + '</div>'
 
                                     + '</div>'
@@ -787,5 +790,40 @@
 
         });
     }
+
+    function ConvertDate(data) {
+        const months = [
+            'janvier',
+            'février',
+            'mars',
+            'avril',
+            'mai',
+            'juin',
+            'juillet',
+            'août',
+            'septembre',
+            'octobre',
+            'novembre',
+            'décembre'
+        ];
+        
+
+        if (data != null) {
+            var date = new Date(parseInt(data.substr(6)));
+            //Format dd-mm-yyyy
+            //var retour = (('0' + (date.getDate())).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear());
+
+            var jour = ('0' + (date.getDate())).slice(-2);
+
+            var mois = ('0' + date.getMonth()).slice(-2);
+            const monthName = months[(parseInt(mois))];
+
+            return { JOUR: jour, MOIS: monthName};
+
+        }
+        else
+            return '';
+    }
+    
 </script>
 
