@@ -114,7 +114,42 @@ namespace CFC.Controllers
                 if (!string.IsNullOrEmpty(value))
                 {
                     var eventCoaching = JsonConvert.DeserializeObject<EventDto>(value);
-                    await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                    if (eventCoaching.ROWID == 0)
+                    {
+                        await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                        return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    var ancien = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", eventCoaching.ROWID));
+                    ancien.LIEU = eventCoaching.LIEU;
+                    ancien.NOM = eventCoaching.NOM;
+                    ancien.TARIF = eventCoaching.TARIF;
+                    ancien.TITRE = eventCoaching.TITRE;
+                    ancien.TYPE = eventCoaching.TYPE;
+                    ancien.URLIMAGE = eventCoaching.URLIMAGE;
+                    ancien.DESCRIPTION = eventCoaching.DESCRIPTION;
+                    ancien.ESTPAYANT = eventCoaching.ESTPAYANT;
+                    ancien.ESTPUBLIER = eventCoaching.ESTPUBLIER;
+                    _db.Update("TB_EVENT", "ROWID", ancien);
+                    return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SupprimerEventCoaching(int ID)
+        {
+            try
+            {
+                if (ID > 0)
+                {
+                    var eventCoaching = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", ID));
+                    _db.Delete("TB_EVENT", "ROWID", eventCoaching);
                     return Json(new { data = true }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -144,31 +179,37 @@ namespace CFC.Controllers
             return Json(new { data = false }, JsonRequestBehavior.AllowGet);
         }
 
-
-        #endregion
-
-
-        #region Liste Participant ***by brice***
-        [HttpGet]
-        public JsonResult ListeParticipants(string id)
+        
+        public JsonResult Intermediaire ()
         {
-            // _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT"));
-            //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
-            try
-            {
-                Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + id);
-                var liste = _db.Fetch<ParticipantDto>(sql);
-                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
-
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-                return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
-            }
-
+             return Json(new { data = true }, JsonRequestBehavior.AllowGet);
         }
+
+
         #endregion
+
+
+        //#region Liste Participant ***by brice***
+        //[HttpGet]
+        //public JsonResult ListeParticipants(string id)
+        //{
+        //    // _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+        //    //var liste = await _db.FetchAsync<EventDto>(new Sql().Select("*").From("TB_EVENT"));
+        //    try
+        //    {
+        //        Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + id);
+        //        var liste = _db.Fetch<ParticipantDto>(sql);
+        //        return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var message = ex.Message;
+        //        return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
+        //    }
+
+        //}
+        //#endregion
 
         #region News Events ***by brice***
         [HttpGet]
@@ -222,16 +263,31 @@ namespace CFC.Controllers
             return Json(new { ok = true, liste = ListeSecteur.ToList() },JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult MethodePassage()
+        [HttpPost]
+        public JsonResult ListeParticipants(int jsonObject)  
         {
+            string message = string.Empty;
+            try
+            {
+                //int id = Convert.ToInt32(jsonObject);
+                Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + jsonObject);
+                var liste = _db.Fetch<ParticipantDto>(sql);
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
 
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            return Json(new { ok = false, data = "", message = "Succès" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult VueParticipants(int id)   
+        {
+            TempData["ROWID"] = id;
             var url = Request.Url.GetLeftPart(UriPartial.Authority);
             //tu peux faire passer les parametres ici et les communiquer à la vue soit avec un viewbag ou un viewdata
             return Redirect(url + "/ListeParticipant");
         }
-    }
-
-
-     
     }
 }
