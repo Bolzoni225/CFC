@@ -14,9 +14,8 @@ namespace CFC.Dto
         public string email { get; set; }
         public string NomEts { get; set; }
         public string AnneeConstitution { get; set; }
-        public int Id_Secteur { get; set; }
+        public string objet { get; set; }
         public string Adressegeographique { get; set; }
-        public DateTime DateCreation { get; set; }
 	
     }
 }
