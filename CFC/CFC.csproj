@@ -2983,10 +2983,10 @@
     <Compile Include="DAL.cs" />
     <Compile Include="Dto\Api.cs" />
     <Compile Include="Dto\CurrentEventModel.cs" />
-    <Compile Include="Dto\EventDto.cs" />
-    <Compile Include="Dto\MotifDto.cs" />
     <Compile Include="Dto\ObjetRetour.cs" />
     <Compile Include="Dto\PaiementDto.cs" />
+    <Compile Include="Dto\EventDto.cs" />
+    <Compile Include="Dto\MotifDto.cs" />
     <Compile Include="Dto\ParticipantDto.cs" />
     <Compile Include="Dto\ParticiperDto.cs" />
     <Compile Include="Dto\RdvDto.cs" />
