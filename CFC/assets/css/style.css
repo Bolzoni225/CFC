@@ -1915,6 +1915,19 @@ ul{
 }
 /*-- btc currency Wrapper End --*/
 /*-- btc calcultor Wrapper Start --*/
+.btc_calc_main_wrapper1 {
+    /*background: url('../images/content/bit_coin_bg.jpg') 50% 0 repeat-y;*/
+    background-color:red;
+    background-size: cover;
+    background-position: center 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    float: left;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+}
 .btc_calc_main_wrapper{
 	background:url('../images/content/bit_coin_bg.jpg') 50% 0 repeat-y;
 	background-size:cover;
