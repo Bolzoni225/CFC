@@ -9,6 +9,5 @@ namespace CFC.Dto
     {
         public int ID { get; set; }
         public string LibelleSecteur { get; set; }
-	
     }
 }

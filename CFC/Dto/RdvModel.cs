@@ -20,5 +20,6 @@ namespace CFC.Dto
         public string DescriptionMotif { get; set; }
         public string DateRDV { get; set; }
         public List<string> ListeMotif { get; set; }
+        public string idSecteur { get; set; }
     }
 }

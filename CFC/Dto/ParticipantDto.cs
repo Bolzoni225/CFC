@@ -17,6 +17,6 @@ namespace CFC.Dto
         public int Id_Secteur { get; set; }
         public string Adressegeographique { get; set; }
         public DateTime DateCreation { get; set; }
-	
+
     }
 }

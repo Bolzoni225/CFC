@@ -336,6 +336,39 @@
     <Content Include="assets\css\owl.theme.default.css" />
     <Content Include="assets\css\responsive.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.bootstrap.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.bootstrap.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.bootstrap4.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.bootstrap4.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.foundation.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.foundation.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.jqueryui.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.jqueryui.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.semanticui.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\dataTables.semanticui.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\jquery.dataTables.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\css\jquery.dataTables.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\images\sort_asc.png" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\images\sort_asc_disabled.png" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\images\sort_both.png" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\images\sort_desc.png" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\images\sort_desc_disabled.png" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.bootstrap.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.bootstrap.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.bootstrap4.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.bootstrap4.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.foundation.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.foundation.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.jqueryui.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.jqueryui.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.semanticui.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\dataTables.semanticui.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\jquery.dataTables.js" />
+    <Content Include="assets\DataTables\DataTables-1.10.23\js\jquery.dataTables.min.js" />
+    <Content Include="assets\DataTables\datatables.css" />
+    <Content Include="assets\DataTables\datatables.js" />
+    <Content Include="assets\DataTables\datatables.min.css" />
+    <Content Include="assets\DataTables\datatables.min.js" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\cancelimg.png" />
@@ -444,6 +477,7 @@
     <Content Include="assets\images\content\testi_img3.jpg" />
     <Content Include="assets\images\content\testi_img3test.jpg" />
     <Content Include="assets\images\content\tittle_bg.jpg" />
+    <Content Include="assets\images\expertisebancaire.jpg" />
     <Content Include="assets\images\header\advisory-e1458825276823.jpg" />
     <Content Include="assets\images\header\bitcoin-globe.gif" />
     <Content Include="assets\images\header\colleagues-437019_1280.jpg" />
@@ -457,6 +491,7 @@
     <Content Include="assets\images\header\slider_img-3.jpg" />
     <Content Include="assets\images\header\slider_img-3test.jpg" />
     <Content Include="assets\images\header\slider_img.jpg" />
+    <Content Include="assets\images\management.jpg" />
     <Content Include="assets\images\moovmoney.png" />
     <Content Include="assets\images\omoney_logo.png" />
     <Content Include="assets\images\parteners_CFC\img1.png" />
@@ -474,6 +509,9 @@
     <Content Include="assets\images\parteners_CFC\img7.png" />
     <Content Include="assets\images\parteners_CFC\img8.png" />
     <Content Include="assets\images\parteners_CFC\img9.png" />
+    <Content Include="assets\images\strategie.jpg" />
+    <Content Include="assets\jQuery-3.3.1\jquery-3.3.1.js" />
+    <Content Include="assets\jQuery-3.3.1\jquery-3.3.1.min.js" />
     <Content Include="assets\js\bit_timer.js" />
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\Chart.bundle.js" />
@@ -2943,6 +2981,7 @@
     <Compile Include="Controllers\RDVController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="DAL.cs" />
+    <Compile Include="Dto\Api.cs" />
     <Compile Include="Dto\CurrentEventModel.cs" />
     <Compile Include="Dto\ParticiperDto.cs" />
     <Compile Include="Dto\ObjetRetour.cs" />
@@ -2952,9 +2991,15 @@
     <Compile Include="Dto\SecteurDto.cs" />
     <Compile Include="Dto\EventDto.cs" />
     <Compile Include="Dto\MotifDto.cs" />
+    <Compile Include="Dto\ObjetRetour.cs" />
+    <Compile Include="Dto\PaiementDto.cs" />
     <Compile Include="Dto\ParticipantDto.cs" />
+    <Compile Include="Dto\ParticiperDto.cs" />
     <Compile Include="Dto\RdvDto.cs" />
     <Compile Include="Dto\RdvModel.cs" />
+    <Compile Include="Dto\RetourPaiement.cs" />
+    <Compile Include="Dto\SecteurDto.cs" />
+    <Compile Include="Dto\SmtpDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3134,6 +3179,11 @@
     <Content Include="Views\FormulaireRdv.cshtml" />
     <Content Include="Views\ListeParticipant.cshtml" />
     <Content Include="Views\Echec.cshtml" />
+    <Content Include="Views\Liste_Rdv.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\PageServiceBancaire.cshtml" />
+    <Content Include="Views\PageStrategie.cshtml" />
+    <Content Include="Views\PageManagement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
