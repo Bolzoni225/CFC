@@ -483,6 +483,27 @@ namespace CFC.Controllers
 
         }
 
+        [HttpGet]
+        public JsonResult LastEvents()
+        {
+            try
+            {
+                //var liste = _db.Fetch<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ESTPUBLIER = @estPublier", new { estPublier = false }));
+
+                var stringSql = "SELECT TOP 5 * FROM TB_EVENT WHERE ESTPUBLIER = '" + true + "'";
+                var query = new Sql(stringSql);
+                var liste = _db.Fetch<EventDto>(query);
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                return Json(new { ok = false, data = "", message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         [HttpPost]//pas soumit au service
         public JsonResult CreateCurrentEvent(string jsonObject)
         {
@@ -506,6 +527,8 @@ namespace CFC.Controllers
 
         }
         #endregion
+
+
         [HttpGet]
         public JsonResult Secteur()
         {
