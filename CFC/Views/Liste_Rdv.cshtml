@@ -119,6 +119,17 @@
 
                         </div>
 
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Date RDV</label>
+                            <input type="text" class="form-control form-control-sm" id="dateRDV" placeholder="" readonly>
+
+                        </div>
+                        <div class="col-md-6 margin-bottom-20px">
+                            <label><i class="far fa-tasks margin-right-10px"></i>Heure RDV</label>
+                            <input type="text" class="form-control form-control-sm" id="timeRDV" placeholder="" readonly>
+
+                        </div>
+
 
 
                     </div>
@@ -206,6 +217,7 @@
                 type: "GET",
                 url: "/Umbraco/Surface/RDV/ListeRDV",
                 success: function (res) {
+                    debugger
                     if (res.ok === true) {
                         $.each(res.liste, function (i, n) {
                             table.rows.add([{
@@ -229,7 +241,19 @@
                 $("#mymodal").modal("hide");
             });
 
+            function ConvertDate(data) {
 
+                if (data != null) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(data);
+                    var dt = new Date(parseFloat(results[1]));
+                    // get date in dd/MM/yyyy format
+                    return (dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear());
+
+                }
+                else
+                    return '';
+            }
 
 
             $('#tbrdv').on('click', 'td > a[id=details]', function () {
@@ -249,17 +273,21 @@
                         if (res.ok == true) {
                             $.each(res.liste, function (i, n) {
                                 debugger
+                                var time = n.timeRDV.Hours + ":" + n.timeRDV.Minutes;
                                 $("#nomdem").val(n.NomDemandeur + " " + n.PrenomsDemandeur);
                                 $("#description").val(n.DescriptionMotif);
                                 $("#phone").val(n.Telephone);
                                 $("#email").val(n.Email);
-                                $("#fonction").val(n.fonction);
+                                $("#fonction").val(n.Fonction);
                                 $("#nomEts").val(n.NomEntreprise);
                                 $("#Annec").val(n.AnneeConstitution);
                                 $("#CA").val(n.ChiffreAffaire);
-                                $("#Objet").val(n.ObjetRDV);
-                                $("#activite").val(res.secteur);
+                                $("#objet").val(n.ObjetRDV);
+                                $("#activite").val(n.secteur);
+                                $("#timeRDV").val(time);
+                                $("#dateRDV").val(ConvertDate(n.DateRDV));
                                 $.each(res.ListMotif, function (i, t) {
+                                    tbMotif.clear().draw();
                                   debugger
                                     tbMotif.rows.add([{
                                         "ID" : i+1,
@@ -282,7 +310,17 @@
 
             });
 
+            function turndate(data) {
+                debugger
+                var d = new Date(data);
+                var formattedDate = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+                var hours = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
+                var minutes = (d.getMinutes() < 10) ? "0" + d.getMinutes() : d.getMinutes();
+                var formattedTime = hours + ":" + minutes;
 
+                formattedDate = formattedDate + " " + formattedTime;
+            }
+           
            
         });
     </script>

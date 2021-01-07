@@ -33,7 +33,6 @@ namespace CFC.Controllers
         [HttpPost]
         public JsonResult DemandeRdv(string value)
         {
-
             var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
             string url = string.Empty;
 
@@ -54,7 +53,9 @@ namespace CFC.Controllers
                     DateRDV = Convert.ToDateTime(RDV.DateRDV),
                     Fonction = RDV.Fonction,
                     ObjetRDV = RDV.ObjetRDV,
-                    idSecteur = Convert.ToInt32(RDV.idSecteur)
+                    idSecteur = Convert.ToInt32(RDV.idSecteur),
+                    timeRDV = TimeSpan.Parse(RDV.timeRDV),
+                    DateCreation = DateTime.UtcNow
 
                 };
                 Sql sql = new Sql("SELECT TOP   1 * FROM TB_RDV ORDER BY ROWIDAUTO DESC");
@@ -86,14 +87,14 @@ namespace CFC.Controllers
         [HttpGet]
        public JsonResult ListeRDV()
         {
-            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV");
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV ORDER BY DATECREATION DESC");
             var liste = _db.Fetch<RdvDto>(sql);
             return Json(new { ok = true, liste = liste.ToList() }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult RDVUnique(string id)
         {
-            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur FROM TB_RDV where rowidauto="+id);
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur,DateCreation,timeRDV FROM TB_RDV where rowidauto="+id);
             var liste = _db.Fetch<RdvDto>(sql);
             Sql sqlSecteur = new Sql("SELECT * FROM TB_SECTEUR WHERE ID=" + liste.FirstOrDefault().idSecteur);
             var secteur = _db.Fetch<SecteurDto>(sqlSecteur).FirstOrDefault().LibelleSecteur.ToString();
@@ -119,6 +120,13 @@ namespace CFC.Controllers
                 if (!string.IsNullOrEmpty(value))
                 {
                     var eventCoaching = JsonConvert.DeserializeObject<EventDto>(value);
+                    //var date = Convert.ToDateTime(eventCoaching.date);
+                    //var time = TimeSpan.Parse(eventCoaching.time);
+                    //eventCoaching.DATE_HEURE = date;
+                    //eventCoaching.DATE_HEURE.AddHours(time.Hours);
+                    //eventCoaching.DATE_HEURE.AddMinutes(time.Minutes);
+                    //eventCoaching.DATE_HEURE.AddSeconds(time.Seconds);
+
                     if (eventCoaching.ROWID == 0)
                     {
                         await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);

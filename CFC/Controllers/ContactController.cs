@@ -45,16 +45,17 @@ namespace CFC.Controllers
                 Credentials = new NetworkCredential(ParametreSmtp.NomUtilisateur, ParametreSmtp.Mdp),
                 Host =ParametreSmtp.NomServeur,
                 Port = Convert.ToInt32(ParametreSmtp.Port),
-                EnableSsl = false
+                EnableSsl = true
             };
             //client.Port = 25;
             //client.Host = "localhost";
             //client.Credentials = new NetworkCredential("user1@test.com", "cedricanselme");
             
             //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            MailMessage mailMessage = new MailMessage(email,"user2@test.com");
+            MailMessage mailMessage = new MailMessage(email,ParametreSmtp.NomUtilisateur);
             mailMessage.Subject = objet;
             mailMessage.Body = message;
+            
           
                 client.Send(mailMessage);
                 

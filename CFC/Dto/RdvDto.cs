@@ -21,6 +21,8 @@ namespace CFC.Dto
         public DateTime DateRDV {get;set;}
        public int RowidAuto { get; set; }
         public int idSecteur { get; set; }
+        public TimeSpan timeRDV { get; set; }
+        public  DateTime DateCreation { get; set; }
         
 	
     }

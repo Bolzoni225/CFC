@@ -11,12 +11,14 @@ namespace CFC.Dto
         public string NOM { get; set; }
         public string TITRE { get; set; }
         public string DESCRIPTION { get; set; }
-        public byte ESTPAYANT { get; set; }
-        public decimal TARIF { get; set; }
-        public byte ESTPUBLIER { get; set; }
+        public bool ESTPAYANT { get; set; }
+        public decimal? TARIF { get; set; }
+        public bool ESTPUBLIER { get; set; }
         public int TYPE { get; set; }
         public string LIEU { get; set; }
         public DateTime DATE_HEURE { get; set; }
         public string URLIMAGE { get; set; }
+        //public string date { get; set; }
+        //public string time { get; set; }
     }
 }
