@@ -33,7 +33,6 @@ namespace CFC.Controllers
         [HttpPost]
         public JsonResult DemandeRdv(string value)
         {
-
             var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
             string url = string.Empty;
 
@@ -54,7 +53,9 @@ namespace CFC.Controllers
                     DateRDV = Convert.ToDateTime(RDV.DateRDV),
                     Fonction = RDV.Fonction,
                     ObjetRDV = RDV.ObjetRDV,
-                    idSecteur = Convert.ToInt32(RDV.idSecteur)
+                    idSecteur = Convert.ToInt32(RDV.idSecteur),
+                    timeRDV = TimeSpan.Parse(RDV.timeRDV),
+                    DateCreation = DateTime.UtcNow
 
                 };
                 Sql sql = new Sql("SELECT TOP   1 * FROM TB_RDV ORDER BY ROWIDAUTO DESC");
@@ -86,14 +87,14 @@ namespace CFC.Controllers
         [HttpGet]
        public JsonResult ListeRDV()
         {
-            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV");
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto FROM TB_RDV ORDER BY DATECREATION DESC");
             var liste = _db.Fetch<RdvDto>(sql);
             return Json(new { ok = true, liste = liste.ToList() }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult RDVUnique(string id)
         {
-            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur FROM TB_RDV where rowidauto="+id);
+            Sql sql = new Sql("SELECT NomDemandeur,PrenomsDemandeur,Fonction,Telephone,Email,NomEntreprise,AnneeConstitution,ObjetRDV,ChiffreAffaire,DescriptionMotif,DateRDV,RowidAuto,idSecteur,DateCreation,timeRDV FROM TB_RDV where rowidauto="+id);
             var liste = _db.Fetch<RdvDto>(sql);
             Sql sqlSecteur = new Sql("SELECT * FROM TB_SECTEUR WHERE ID=" + liste.FirstOrDefault().idSecteur);
             var secteur = _db.Fetch<SecteurDto>(sqlSecteur).FirstOrDefault().LibelleSecteur.ToString();
@@ -102,7 +103,7 @@ namespace CFC.Controllers
             return Json(new { ok = true, liste = liste.ToList(), ListMotif = ListeMotif, secteur = secteur }, JsonRequestBehavior.AllowGet);
         }
 
-       
+
 
         #region Events / Coaching 
         public async Task<JsonResult> ListeEventsCoaching()
@@ -119,7 +120,49 @@ namespace CFC.Controllers
                 if (!string.IsNullOrEmpty(value))
                 {
                     var eventCoaching = JsonConvert.DeserializeObject<EventDto>(value);
-                    await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                    //var date = Convert.ToDateTime(eventCoaching.date);
+                    //var time = TimeSpan.Parse(eventCoaching.time);
+                    //eventCoaching.DATE_HEURE = date;
+                    //eventCoaching.DATE_HEURE.AddHours(time.Hours);
+                    //eventCoaching.DATE_HEURE.AddMinutes(time.Minutes);
+                    //eventCoaching.DATE_HEURE.AddSeconds(time.Seconds);
+
+                    if (eventCoaching.ROWID == 0)
+                    {
+                        await _db.InsertAsync<EventDto>("TB_EVENT", "ROWID", true, eventCoaching);
+                        return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    var ancien = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", eventCoaching.ROWID));
+                    ancien.LIEU = eventCoaching.LIEU;
+                    ancien.NOM = eventCoaching.NOM;
+                    ancien.TARIF = eventCoaching.TARIF;
+                    ancien.TITRE = eventCoaching.TITRE;
+                    ancien.TYPE = eventCoaching.TYPE;
+                    ancien.URLIMAGE = eventCoaching.URLIMAGE;
+                    ancien.DESCRIPTION = eventCoaching.DESCRIPTION;
+                    ancien.ESTPAYANT = eventCoaching.ESTPAYANT;
+                    ancien.ESTPUBLIER = eventCoaching.ESTPUBLIER;
+                    _db.Update("TB_EVENT", "ROWID", ancien);
+                    return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { data = false }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SupprimerEventCoaching(int ID)
+        {
+            try
+            {
+                if (ID > 0)
+                {
+                    var eventCoaching = await _db.SingleAsync<EventDto>(new Sql().Select("*").From("TB_EVENT").Where("ROWID = @0", ID));
+                    _db.Delete("TB_EVENT", "ROWID", eventCoaching);
                     return Json(new { data = true }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -149,6 +192,38 @@ namespace CFC.Controllers
             return Json(new { data = false }, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult Intermediaire()
+        {
+            return Json(new { data = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ListeParticipants(int jsonObject)
+        {
+            string message = string.Empty;
+            try
+            {
+                //int id = Convert.ToInt32(jsonObject);
+                Sql sql = new Sql("SELECT * FROM TB_PARTICPANT TBP, TB_PARTICIPER TBPAR WHERE TBP.ROWID = TBPAR.rowidparticipant AND TBPAR.rowidevenement =" + jsonObject);
+                var liste = _db.Fetch<ParticipantDto>(sql);
+                return Json(new { ok = true, data = liste }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            return Json(new { ok = false, data = "", message = "Succès" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult VueParticipants(int id)
+        {
+            TempData["ROWID"] = id;
+            var url = Request.Url.GetLeftPart(UriPartial.Authority);
+            //tu peux faire passer les parametres ici et les communiquer à la vue soit avec un viewbag ou un viewdata
+            return Redirect(url + "/ListeParticipant");
+        }
 
         #endregion
 

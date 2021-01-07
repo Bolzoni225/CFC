@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /CFC/App_Data/TEMP/ExamineIndexes
+/CFC/App_Data/Logs/UmbracoTraceLog.ASC-PC029.20210105.json

@@ -225,7 +225,8 @@
 
                         <div class="form-group margin-bottom-20px">
                             <label> Date et heure souhaitée</label>
-                            <input type="date" id="daterdv" name="daterdv" class="form-control" />
+                            <input type="date" id="daterdv" name="daterdv" class="form-control col-lg-1 col-md-1" />
+                            <input type="time" id="timerdv" name="timerdv" class="form-control" />
                             @*<input type="time" id="time" name="time" class="form-control" />*@
                         </div>
 
@@ -288,7 +289,8 @@
                 ListeMotif: favorite,
                 DescriptionMotif: $("#description").val(),
                 DateRDV: $("#daterdv").val(),
-                idSecteur: $("#activite").val()
+                idSecteur: $("#activite").val(),
+                timeRDV: $("#timerdv").val()
             };
             $.ajax({
                 type: "POST",
