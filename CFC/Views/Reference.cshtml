@@ -3,7 +3,21 @@
 @{
     Layout = "Layout_site.cshtml";
 }
+<link href="~/assets/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" />
+<link href="~/assets/bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/assets/bootstrap-5.0.0-beta1-dist/js/bootstrap.js"></script>
+<script src="~/assets/bootstrap-5.0.0-beta1-dist/js/bootstrap.min.js"></script>
+<style>
+    a {
+        text-decoration: none; /* no underline */
+    }
 
+    li > ul {
+        padding-left: 0px;
+        margin-left: 0px;
+
+    }
+</style>
 <!-- btc tittle Wrapper Start -->
 <div class="btc_tittle_main_wrapper">
     <div class="btc_tittle_img_overlay"></div>
@@ -32,7 +46,7 @@
 <div class="btc_team_main_wrapper" data-parallax="scroll" data-image-src="~/assets/images/content/service_bg.jpg" style="margin-top:25px; padding-top:0px;">
     <div class="container">
         <div class="row">
-            <div class="btc_team_left_wrapper" style="margin-top:0px; padding-top:0px;">
+            <div class="btc_team_left_wrapper col-lg-4" style="margin-top:0px; padding-top:0px;">
                 <h3 style="color:#ff880e;"> Activités & évènements passés</h3>
                 <span>#</span>
                 <p>
@@ -40,71 +54,29 @@
                 </p>
             </div>
 
-            <div class="btc_team_right_wrapper">
-                <div class="btc_team_slider_wrapper">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item">
-                            <div class="btc_team_slider_cont_main_wrapper">
-                                <div class="btc_team_img_wrapper">
-                                    <img src="~/assets/images/content/team1.jpg" alt="team_img1">
-                                    <div class="btc_team_social_wrapper">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="btc_team_img_cont_wrapper">
-                                    <h4><a href="#">Ajay Suryavanshi</a></h4>
-                                    <p>(Consultant)</p>
-                                </div>
-                            </div>
+            <div id="carouselExampleCaptions" class="col-lg-8 carousel slide" data-bs-ride="carousel">
+                
+                <div class="carousel-inner" id="div_evenement">
+                    @*<div class="carousel-item active" >
+                        <img src="~/assets/images/content/blog_img1.jpg" class="d-block  w-100" style="height:400px;" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                         </div>
-                        <div class="item">
-                            <div class="btc_team_slider_cont_main_wrapper">
-                                <div class="btc_team_img_wrapper">
-                                    <img src="~/assets/images/content/team2.jpg" alt="team_img1">
-                                    <div class="btc_team_social_wrapper">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="btc_team_img_cont_wrapper">
-                                    <h4><a href="#">Jenifer Doe</a></h4>
-                                    <p>(Consultant)</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="btc_team_slider_cont_main_wrapper">
-                                <div class="btc_team_img_wrapper">
-                                    <img src="~/assets/images/content/team3.jpg" alt="team_img1">
-                                    <div class="btc_team_social_wrapper">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="btc_team_img_cont_wrapper">
-                                    <h4><a href="#">Akshay Handge</a></h4>
-                                    <p>(Consultant)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>*@
+                    
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
             </div>
         </div>
-        
+
 
         <hr />
 
@@ -125,93 +97,194 @@
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img1.png" alt="partner_img"  width="150" height="100" />
+                    <img src="~/assets/images/parteners_CFC/img1.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img2.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img2.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img3.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img3.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img4.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img4.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img5.png" alt="partner_img" width="150" height="80"/>
+                    <img src="~/assets/images/parteners_CFC/img5.png" alt="partner_img" width="150" height="80" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img6.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img6.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img7.png" alt="partner_img" width="150" height="100"/>
-                </div>
-            </div>
-
-            <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
-                <div class="">
-                    <img src="~/assets/images/parteners_CFC/img8.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img7.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img9.png" alt="partner_img" width="150" height="150"/>
+                    <img src="~/assets/images/parteners_CFC/img8.png" alt="partner_img" width="150" height="100" />
+                </div>
+            </div>
+
+            <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
+                <div class="">
+                    <img src="~/assets/images/parteners_CFC/img9.png" alt="partner_img" width="150" height="150" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:20px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img10.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img10.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img11.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img11.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img12.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img12.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img13.png" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img13.png" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img14.png" alt="partner_img" width="150" height="50"/>
+                    <img src="~/assets/images/parteners_CFC/img14.png" alt="partner_img" width="150" height="50" />
                 </div>
             </div>
 
             <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-12" style="margin-bottom:40px">
                 <div class="">
-                    <img src="~/assets/images/parteners_CFC/img15.jpg" alt="partner_img" width="150" height="100"/>
+                    <img src="~/assets/images/parteners_CFC/img15.jpg" alt="partner_img" width="150" height="100" />
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- btc team Wrapper End -->
+
+<script src="~/assets/adminAssets/js/jquery-3.2.1.min.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        charger_donnees();
+
+    });
+
+    function charger_donnees() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("LastEvents", "RDV")',
+            dataType: "json",
+            success: function (data) {
+                if (data.ok == true) {
+                    if (data.data.length > 0) {
+                        $.each(data.data, function (i, val) {
+
+                            var image = "/assets/images/content/blog_img1.jpg";
+                            if (val.URLIMAGE != "" && val.URLIMAGE != null) {
+                                image = val.URLIMAGE;
+                            }
+
+                            var active = "";
+                            if (i == 0) {
+                                active = "active";
+                            }
+
+                            var date = ConvertDate(val.DATE_HEURE);
+
+                            //var line = '<div class="owl-item cloned" style="width: 259.667px; margin-right: 20px;"><div class="item">'
+                            //    + '<div class="btc_team_slider_cont_main_wrapper" >'
+                            //    + '<div class="btc_team_img_wrapper">'
+                            //    + ' <img src="' + image + '" alt="team_img1">'
+
+                            //    + '</div>'
+                            //    + ' <div class="btc_team_img_cont_wrapper">'
+                            //    + '      <h5><a href="#">' + date.JOUR + ' ' + date.MOIS + '</a></h5>'
+                            //    + '      <h4><a href="#">' + val.NOM + '</a></h4>'
+                            //    + '     <p>' + val.TITRE + '</p>'
+                            //    + '  </div>'
+                            //    + ' </div>'
+                            //    + '</div></div>';
+
+                            var line = '<div class="carousel-item ' + active + '">'
+                                + '<img src="' + image + '" class="d-block  w-100" style="height:400px;" alt="...">'
+                                + ' <div class="carousel-caption d-none d-md-block">'
+                                + '      <h5 style="color:#ff880e;">' + date.JOUR + ' ' + date.MOIS + '</h5>'
+                                + '      <h4 style="color:#ff880e;">' + val.NOM + '</h4>'
+                                + '     <p>' + val.TITRE + '</p>'
+                                + '    </div>'
+                                + ' </div>';
+
+                            $("#div_evenement").append(line);
+                        });
+                    }
+
+                }
+            },
+            error: function (msg) {
+                //swal("Attention", data.message, "error");
+            }
+        });
+    }
+
+    function ConvertDate(data) {
+        const months = [
+            'janvier',
+            'février',
+            'mars',
+            'avril',
+            'mai',
+            'juin',
+            'juillet',
+            'août',
+            'septembre',
+            'octobre',
+            'novembre',
+            'décembre'
+        ];
+
+
+        if (data != null) {
+            var date = new Date(parseInt(data.substr(6)));
+            //Format dd-mm-yyyy
+            //var retour = (('0' + (date.getDate())).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear());
+
+            var jour = ('0' + (date.getDate())).slice(-2);
+
+            var mois = ('0' + date.getMonth()).slice(-2);
+            const monthName = months[(parseInt(mois))];
+
+            return { JOUR: jour, MOIS: monthName };
+
+        }
+        else
+            return '';
+    }
+</script>
