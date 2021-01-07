@@ -1,0 +1,169 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Contact>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "Layout_site.cshtml";
+}
+<div class="btc_tittle_main_wrapper">
+    <div class="btc_tittle_img_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 full_width">
+                <div class="btc_tittle_left_heading">
+                    <h1>Nous contacter</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 full_width">
+                <div class="btc_tittle_right_heading">
+                    <div class="btc_tittle_right_cont_wrapper">
+                        <ul>
+                            <li><a href="Accueil">Accueil</a> <i class="fa fa-angle-right"></i></li>
+                            <li>Nous contacter</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btc_contact_tittle_main_wrapper" data-parallax="scroll" data-image-src="images/content/service_bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="btc_contact_tittle_box_wrapper">
+                    <div class="btc_step_icon_wrapper">
+                        <div class="btc_step_hover_effect">
+                            <i class="flaticon-placeholder"></i>
+                            <div class="btc_step_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="btc_contact_tittle_contant_wrapper">
+                        <h2>Addresse</h2>
+                        <p>Abidjan <br /> Cocody, Riviera Palmeraie <br> Boulevard Mitterrand près du nouveau camp militaire d’Akouédo, 3ème étage de l’immeuble SCI PELICAN</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="btc_contact_tittle_box_wrapper btc_contact_tittle_box_wrapper2">
+                    <div class="btc_step_icon_wrapper">
+                        <div class="btc_step_hover_effect">
+                            <i class="flaticon-phone-call"></i>
+                            <div class="btc_step_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="btc_contact_tittle_contant_wrapper">
+                        <h2>Téléphone</h2>
+                        <p>+225 67 604 603 / +225 73 750 000 </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="btc_contact_tittle_box_wrapper btc_contact_tittle_box_wrapper2">
+                    <div class="btc_step_icon_wrapper">
+                        <div class="btc_step_hover_effect">
+                            <i class="flaticon-mail"></i>
+                            <div class="btc_step_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="btc_contact_tittle_contant_wrapper">
+                        <h2>Email</h2>
+                        <p>info@cfcfinance.net</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btc_contact_map_main_wrapper">
+    <div class="btc_contact_map_img_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="btc_contact_map_left_section">
+                    <div id="map" style="width:100%; float:left; height:600px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="btc_contact_map_right_section">
+                    <h5>Get In Touch</h5>
+                    <h3>Avez vous des questions ?</h3>
+                    <span>#</span>
+                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagitti.</p>
+                </div>
+                @using (Html.BeginForm("SendMail", "Contact",FormMethod.Post))
+                {
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="btc_contact_map_inputs">
+                            <input type="text" placeholder="Nom" id="nom" name="nom">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="btc_contact_map_inputs btc_contact_map_inputs3">
+                            <input type="email" placeholder="Adresse Email" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="btc_contact_map_inputs btc_contact_map_inputs2">
+                            <input type="text" placeholder="Téléphone" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="btc_contact_map_inputs btc_contact_map_inputs2">
+                            <input type="text" placeholder="Objet du mail" id="objet" name="objet">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="btc_contact_map_inputs btc_contact_map_inputs2">
+                            <textarea rows="6" placeholder="Message" id="message" name="message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="btc_contact_map_btn">
+                            <button type="submit">Envoyez</button>
+
+                            @*<ul>
+                                <li><a href="#" id="send">Envoyez</a></li>
+                                
+                            </ul>*@
+                        </div>
+                    </div>
+                </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function initMap() {
+        var uluru = { lat: 5.3720914935798575, lng: -3.9425025444912034 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            scrollwheel: false,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqkdlwOxFDpOi-HZmR9yzw-lwWwk_sMVQ&callback=initMap"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#send").click(function () {
+            var ojbet = {
+                nom = $("#nom").val(),
+                objet = $("#objet").val(),
+                message = $("#message").val(),
+                phone = $("#phone").val()
+
+            };
+
+
+        });
+    });
+</script>

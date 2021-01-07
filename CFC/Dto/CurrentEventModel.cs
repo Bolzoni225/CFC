@@ -10,7 +10,7 @@ namespace CFC.Dto
         public int ROWID { get; set; }
         public string NOM { get; set; }
         public string TITRE { get; set; }
-        public byte ESTPAYANT { get; set; }
+        public bool ESTPAYANT { get; set; }
         public decimal TARIF { get; set; }
 	
     }

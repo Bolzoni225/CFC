@@ -4,7 +4,7 @@
 @{
     Layout = "Layout_site.cshtml";
 
-    var ROWID = 0; var NOM = ""; var TITRE = ""; var ESTPAYANT = 0; decimal TARIF = 0;
+    var ROWID = 0; var NOM = ""; var TITRE = ""; var ESTPAYANT = false; decimal TARIF = 0;
 
     var currentEvent = new CurrentEventModel();
     if (Session["CurrentEvent"] != null)
@@ -139,7 +139,7 @@
 <!-- btc calcultor Wrapper End -->
 <!-- btc Video Wrapper Start -->
 @{
-    if (ESTPAYANT == 1)
+    if (ESTPAYANT == true)
     {
         <div class="row" style="height:-5%;">
             <div class="">

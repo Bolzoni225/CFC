@@ -1,0 +1,335 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Evenement>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "Layout_app.cshtml";
+}
+<div class="container-fluid overflow-hidden">
+    <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+        <!-- Page Title -->
+        <div id="page-title" class="col- 12 padding-30px background-white full-width">
+            <div class="container">
+                <ol class="breadcrumb opacity-5">
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="active">Liste évènement et coaching</li>
+                </ol>
+                <h1 class="font-weight-300">EVENEMENTS ET COACHINGS</h1>
+            </div>
+        </div>
+        <!-- // Page Title -->
+        <div class="margin-tb-30px full-width">
+            <!-- Demande item -->
+            <div class="background-white thum-hover box-shadow hvr-float full-width  margin-bottom-45px padding-top-20px">
+                @*<h2>LA LISTE DES EVENEMENT / COACHING</h2>*@
+                <br /><br />
+                <div class="col-12" id="tableEvents"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myPopUp">
+    <div class="row">
+        <!-- Demande item -->
+        <div class="background-grey thum-hover full-width  padding-top-20px">
+
+            VEUILLEZ REMPLIR CE FORMULAIRE POUR CREER UN EVENEMENT OU UN COACHING
+            <br /><br />
+            <hr class="margin-tb-5px">
+
+            <div class="row padding-right-45px">
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-question-circle margin-right-10px"></i>  Type</label>
+                    <select class="selectpicker form-control" id="selType">
+                        <option value="0" disabled selected>--Sélectionner--</option>
+                        <option value="1">Evènement</option>
+                        <option value="2">Coaching</option>
+                    </select>
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-user margin-right-10px"></i> Nom</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nom" id="txtNom">
+                </div>
+            </div>
+
+            <div class="row padding-right-45px">
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-tasks margin-right-10px"></i> Titre</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Titre" id="txtTitre">
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i> Description évènement / coaching</label>
+                    <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching" id="txtDescription"></textarea>
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i> Date</label>
+                    <input type="date" id="dateevent" class="form-control">
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i>Heure</label>
+                    <input type="time" id="timeevent" class="form-control">
+                </div>
+
+
+                <div class="col-md-6 margin-bottom-20px checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPayant">
+                        Est payant
+                    </label>
+                </div>
+                <div class="col-md-6 margin-bottom-20px checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox" id="chkEstPublier">
+                        Publier
+                    </label>
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-money margin-right-10px"></i> Tarif</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Tarif" id="txtTarif">
+                </div>
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-money margin-right-10px"></i> Url image</label>
+                    <input type="text" id="inp_img" class="form-control form-control-sm" placeholder="Url image">
+                </div>
+            </div>
+        </div>
+        <!-- // Demande item -->
+
+    </div>
+</div>
+
+<script>
+    let ID = 0;
+    $(function () {
+        $("#tableEvents").jsGrid({
+            width: "100%",
+            height: "400px",
+            editing: false,
+            sorting: true,
+            paging: true,
+            autoload: true,
+            selecting: false,
+            @*rowClick: function (args) {
+                const id = args.item.ROWID;
+                ID = parseInt(id);
+                $.ajax({
+                    url: '@Url.Action("EventCoaching", "RDV")',
+                    method: "post",
+                    data: { ID: JSON.stringify(id) }
+                }).done(function (retour) {
+                    debugger;
+                    $("#selType").val(retour.data.TYPE);
+                    $("#txtNom").val(retour.data.NOM);
+                    $("#txtTitre").val(retour.data.TITRE);
+                    $("#txtDescription").val(retour.data.DESCRIPTION);
+                    retour.data.ESTPAYANT ? $("#chkEstPayant").prop("checked",true) : $("#chkEstPayant").prop("checked",false);
+                    retour.data.ESTPUBLIER ? $("#chkEstPublier").prop("checked",true) : $("#chkEstPublier").prop("checked", false);
+                    $("#txtTarif").val(retour.data.TARIF);
+                    $("#myPopUp").dialog({
+                        autoOpen: false,
+                        width: 850,
+                        title: "Modifier",
+                        close: Effacer,
+                        buttons: [
+                            {
+                                text: "Enregistrer",
+                                click: function () {
+                                    Enregistrer();
+                                    $(this).dialog("close");
+                                }
+                            },
+                            {
+                                text: "Annuler",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        ],
+                    }).dialog("open");
+                });
+            },*@
+            controller: {
+                loadData: function () {
+                    const d = $.Deferred();
+                    $.ajax({
+                        url: '@Url.Action("ListeEventsCoaching", "RDV")',
+                        method: "get"
+                    }).done(function (retour) {
+                        debugger;
+                        const result = retour.data.length > 0 ? retour.data : [];
+                        d.resolve(result);
+                    });
+                    return d.promise();
+                },
+                deleteItem: function (item) {
+                    debugger;
+                    $.ajax({
+                        url: '@Url.Action("SupprimerEventCoaching","RDV")',
+                        method: "post",
+                        data: {ID : JSON.stringify(item.ROWID)}
+                    }).done(function (retour) {
+                        if (retour.data.Etat) {
+                            $("#tableEvents").jsGrid("loadData");
+                        }
+                    }).catch(error => console.log(error));
+                }
+            },
+            fields: [
+                { name: "ROWID", type: Number, visible: false },
+                { name: "TITRE", title: "TITRE", type: "text", width: 30 },
+                { name: "DESCRIPTION", title: "DESCRIPTION", type: "text", width: 30 },
+                {
+                    name: "ESTPAYANT", title: "PAYANT", type: "text", width: 5,
+                    itemTemplate: function (value,item) {
+                        return item.ESTPAYANT ? 'OUI' : 'NON';
+                    }
+                },
+                { name: "TARIF", title: "TARIF", type: "text", width: 10 },
+                {
+                    name: "ESTPUBLIER", title: "PUBLIER", type: "text", width: 5,
+                    itemTemplate: function (value, item) {
+                        return item.ESTPUBLIER ? 'OUI' : 'NON';
+                    }
+                },
+                {
+                    title: "Liste des participants", width: 10,
+                    itemTemplate: function (value,item) {
+                        return $("<button class='btn btn-info'>Cliquez ici</button>").
+                            on("click", function (e) {
+                                window.location.href = '@Url.Action("VueParticipants","RDV")/' + item.ROWID;
+                                e.stopPropagation;
+                            });
+                    }
+                },
+                {
+                    type: "control",
+                    modeSwitchButton: false,
+                    width: 25,
+                    editButton: false,
+                    itemTemplate: function (value, item) {
+                        var $result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+                        var $customButton = $("<button>").attr({ class: "customGridDeletebutton jsgrid-button jsgrid-edit-button" })
+                            .on("click",function (e) {
+                                //debugger;
+                                //alert("ID: " + item.ROWID);
+                                $.ajax({
+                    url: '@Url.Action("EventCoaching", "RDV")',
+                    method: "post",
+                    data: { ID: item.ROWID }
+                }).done(function (retour) {
+                    debugger;
+                    $("#selType").val(retour.data.TYPE);
+                    $("#txtNom").val(retour.data.NOM);
+                    $("#txtTitre").val(retour.data.TITRE);
+                    $("#txtDescription").val(retour.data.DESCRIPTION);
+                    retour.data.ESTPAYANT ? $("#chkEstPayant").prop("checked",true) : $("#chkEstPayant").prop("checked",false);
+                    retour.data.ESTPUBLIER ? $("#chkEstPublier").prop("checked",true) : $("#chkEstPublier").prop("checked", false);
+                    $("#txtTarif").val(retour.data.TARIF);
+                    $("#myPopUp").dialog({
+                        autoOpen: false,
+                        width: 850,
+                        title: "Modifier",
+                        close: Effacer,
+                        buttons: [
+                            {
+                                text: "Enregistrer",
+                                click: function () {
+                                    Enregistrer();
+                                    $(this).dialog("close");
+                                }
+                            },
+                            {
+                                text: "Annuler",
+                                click: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        ],
+                    }).dialog("open");
+                });
+                                e.stopPropagation();
+                            });
+
+                        return $result.add($customButton);
+                    },
+                    headerTemplate: function () {
+                        return $("<button class='btn btn-secondary'><i class='fa fa-plus'></i> nouveau</button>")
+                            .on("click", _ => {
+                                $("#myPopUp").dialog({
+                                    autoOpen: false,
+                                    width: 850,
+                                    title: "Nouveau",
+                                    close: Effacer,
+                                    buttons: [
+                                        {
+                                            text: "Enregistrer",
+                                            click: function () {
+                                                Enregistrer();
+                                                $(this).dialog("close");
+                                            }
+                                        },
+                                        {
+                                            text: "Annuler",
+                                            click: function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    ],
+                                }).dialog("open");
+                            });
+                    }
+                }
+            ]
+        });
+        $("#myPopUp").dialog({ autoOpen: false }).dialog("close");
+});
+
+
+    function Enregistrer() {
+      
+           
+
+        var Date_Heure = $("#dateevent").val() + ' ' + $("#timeevent").val();
+        const item = {
+            rowid: ID,
+            type: parseInt($("#selType").val()),
+            nom: $("#txtNom").val(),
+            titre: $("#txtTitre").val(),
+            description: $("#txtDescription").val(),
+            estPayant: $("#chkEstPayant").is(":checked"),
+            estPublier: $("#chkEstPublier").is(":checked"),
+            tarif: parseFloat($("#txtTarif").val()),
+            urlImage: $("#inp_img").val(),
+            Date_Heure : Date_Heure
+           
+        };
+        debugger;
+        $.ajax({
+            url: '@Url.Action("AjouterEventCoaching","RDV")',
+            method: "post",
+            data: { value: JSON.stringify(item) }
+        }).done(function (retour) {
+            debugger
+            if (retour.data) {
+                $("#myPopUp").dialog("close");
+                $("#tableEvents").jsGrid("loadData");
+            }
+        }).catch(error => console.log(error));
+    }
+
+    function Effacer() {
+            $("#selType").val(0);
+            $("#txtNom").val("");
+            $("#txtTitre").val("");
+            $("#txtDescription").val("");
+            $("#chkEstPayant").prop("checked", false);
+            $("#chkEstPublier").prop("checked", false);
+            $("#txtTarif").val("");
+        $("#inp_img").val("");
+        ID = 0;
+    }
+</script>
+

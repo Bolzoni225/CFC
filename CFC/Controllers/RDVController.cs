@@ -294,7 +294,7 @@ namespace CFC.Controllers
 
                     var result = _db.Insert<ParticiperDto>("TB_PARTICIPER", "rowid", NewParticiper);
 
-                    if (currentEvent.ESTPAYANT == 1)
+                    if (currentEvent.ESTPAYANT == true)
                     {
                         //Création du orderid
                         string orderid = null;

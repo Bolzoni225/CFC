@@ -1,0 +1,242 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+
+@{
+    Layout = null;
+
+    //var user = Session["user"];
+    //var currentUser = user != null ? JsonConvert.DeserializeObject<TbUtilisateurDto>($"{user}") as TbUtilisateurDto : null;
+}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>CFC FINANCES - BACKOFFICE</title>
+    <meta name="author" content="Nile-Theme">
+    <meta name="robots" content="index follow">
+    <meta name="googlebot" content="index follow">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="directory, doctor, doctor directory, Health directory, listing, map, medical, medical directory, professional directory, reservation, reviews">
+    <meta name="description" content="Health Care & Medical Services Directory">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800%7CPoppins:300i,300,400,700,400i,500%7CDancing+Script:700%7CDancing+Script:700" rel="stylesheet">
+    <!-- animate -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/animate.css" />
+    <!-- owl Carousel ~/assets/adminAssets -->
+    <link href="~/assets/adminAssets/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/assets/adminAssets/css/owl.theme.css" rel="stylesheet">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/bootstrap.min.css">
+    <!-- hover anmation -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/hover-min.css">
+    <!-- flag icon -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/flag-icon.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/style.css">
+    <!-- colors -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/colors/main.css">
+    <!-- elegant icon -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/elegant_icon.css">
+    <!-- admin style -->
+    <link rel="stylesheet" href="~/assets/adminAssets/css/sb-admin.css">
+    <!-- jsGrid style & theme-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+
+    <!--Jquery ui-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!-- jquery library  -->
+    <script src="~/assets/adminAssets/js/jquery-3.2.1.min.js"></script>
+    <!-- fontawesome  -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+</head>
+<body>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #4CAF50 !important;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    </style>
+
+    <header class="background-white box-shadow fixed-top z-index-99">
+        <nav class="container-fluid header-in">
+            <div class="row">
+                <div class="col-lg-2 col-md-12">
+                    <a id="logo" href="accueil" class="d-inline-block margin-tb-15px"><img src="~/assets/images/header/logo.png" alt="" width="100" height="60"></a>
+                    <a class="mobile-toggle padding-13px background-main-color" href="#"><i class="fas fa-bars"></i></a>
+                </div>
+                <div class="col-lg-9 col-md-12 position-inherit">
+                    <ul id="menu-main" class="nav-menu float-lg-right link-padding-tb-20px">
+                        @*<li>
+                                <a href="accueil">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="#">Nos Services</a>
+                            </li>
+                            <li><a href="page-contact-us.html">Contactez-Nous</a></li>*@
+                        <li class="margin-left-20px">
+                            <a href="profil"><img src="http://placehold.it/60x60" class="height-30px border-radius-30" alt="">@*@currentUser.Nomutilisateur*@</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-1 col-md-12">
+                    <hr class="margin-bottom-0px d-block d-sm-none">
+                    @*<a class="btn btn-sm border-radius-30 margin-tb-15px text-white  box-shadow float-right padding-lr-20px margin-left-30px bg-success">
+                            Connecter
+                        </a>*@
+                    <label class="switch border-radius-30 margin-tb-15px text-white  box-shadow float-right padding-lr-20px margin-left-30px margin-right-5px">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider round"></span>
+                    </label>
+                    @*<a href="profil" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><img src="http://placehold.it/60x60" class="height-30px border-radius-30" alt="">@currentUser.Nomutilisateur</a>*@
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
+                <li class="nav-item">
+                    <span class="nav-title-text">Main</span>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="dashboard">
+                        <i class="fas fa-fw fa-home"></i><span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Favorites">
+                    <a class="nav-link" href="evenement">
+                        <i class="fa fa-fw fa-plus"></i>
+                        <span class="nav-link-text">Evènement & Coaching</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
+                        <a class="nav-link" href="liste_rdv">
+                            <i class="fa fa-fw fa-list-alt"></i>
+                            <span class="nav-link-text">Liste des RDV</span>
+                        </a>
+                    </li>
+                @*<li class="nav-item" data-toggle="tooltip" data-placement="right" title="My items">
+                    <a class="nav-link" href="notifications">
+                        <i class="fa fa-fw fa-table"></i>
+                        <span class="nav-link-text">Notifications</span>
+                    </a>
+                </li>*@
+                @*<li class="nav-item">
+                    <span class="nav-title-text">Opérations</span>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
+                    <a class="nav-link" href="dashboard-bookings.html">
+                        <i class="far fa-fw fa-list-alt"></i>
+                        <span class="nav-link-text">Historique Paiements</span>
+                    </a>
+                </li>*@
+                @*<li class="nav-item">
+                    <span class="nav-title-text">Utilisateur</span>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Profile">
+                    <a class="nav-link" href="profil">
+                        <i class="fa fa-fw fa-user-circle"></i>
+                        <span class="nav-link-text">Mon Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sing Out">
+                    <a class="nav-link" href="@Url.Action("Deconnexion","Post")">
+                        <i class="fa fa-fw fa-sign-out-alt"></i>
+                        <span class="nav-link-text">Se déconnecter</span>
+                    </a>
+                </li>*@
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+
+        @RenderBody()
+
+
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <span>© 2018 tabib Health Directory | All Right Reserved <a class="text-grey-2 margin-left-15px" href="https://themeforest.net/user/nile-theme/portfolio" target="_blank">Powered by : Nile Theme</a></span>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="~/assets/DataTables/DataTables-1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/assets/adminAssets/js/sticky-sidebar.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <script src="~/assets/adminAssets/js/YouTubePopUp.jquery.js"></script>
+    <script src="~/assets/adminAssets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/adminAssets/js/imagesloaded.min.js"></script>
+    <script src="~/assets/adminAssets/js/wow.min.js"></script>
+    <script src="~/assets/adminAssets/js/custom.js"></script>
+    <script src="~/assets/adminAssets/js/popper.min.js"></script>
+    <script src="~/assets/adminAssets/js/bootstrap.min.js"></script>
+</body>
+</html>

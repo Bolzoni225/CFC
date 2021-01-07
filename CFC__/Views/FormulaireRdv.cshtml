@@ -1,0 +1,358 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.FormulaireRdv>
+
+@using ContentModels = Umbraco.Web.PublishedModels;
+
+@{
+    Layout = "Layout_site.cshtml";
+}
+
+<div class="btc_tittle_main_wrapper">
+    <div class="btc_tittle_img_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 full_width">
+                <div class="btc_tittle_left_heading">
+                    <h1>Demander un Rendez-vous</h1>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid ">
+                <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+                    @*@using (Html.BeginForm("DemandeRdv", "RDV", FormMethod.Post))
+                        {*@
+                    <div class=" container col-md-6" style="padding-bottom: 50px;">
+                        <h3> INFO DEMANDEUR </h3>
+                        <hr style="background-color: black !important;">
+
+                        <div class="form-group margin-bottom-20px">
+                            <label> Nom</label>
+                            <input type="text" class="form-control form-control-sm" id="Nom" name="Nom" placeholder="Nom">
+                        </div>
+
+                        <div class="form-group margin-bottom-20px">
+                            <label> Prénoms</label>
+                            <input type="text" class="form-control form-control-sm" id="Prenoms" name="Prenoms" placeholder="Prénoms">
+                        </div>
+                        <div class="form-group margin-bottom-20px">
+                            <label> Titre / Fonction dans l'entreprise</label>
+                            <input type="text" class="form-control form-control-sm" id="titre" name="titre" placeholder="titre/fonction dans l'entreprise">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 margin-bottom-20px">
+                                <label>Téléphone</label>
+                                <input type="text" class="form-control form-control-sm" name="phone" id="phone" placeholder="002229456987">
+                            </div>
+                            <div class="col-md-6 margin-bottom-20px">
+                                <label> Email</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="info@yourname.com" id="email" name="Email">
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class=" background-white border-radius-20 box-shadow col-md-6">
+                        <h3> INFO ENTREPRISE </h3>
+                        <hr style="background-color: black !important;">
+
+                        <div class="form-group margin-bottom-20px">
+                            <label> Nom Entreprise</label>
+                            <input type="text" class="form-control form-control-sm" id="nomets" name="nomets" placeholder="Listing Title">
+                        </div>
+
+                        <div class="form-group margin-bottom-20px">
+                            <label> Année de constitution</label>
+                            <input type="text" class="form-control form-control-sm" id="anneeconstitution" name="anneeconstitution" placeholder="année constitution">
+                        </div>
+                        <div class="form-group margin-bottom-20px">
+                            <label> activité</label>
+                            <select id="activite" name="activite" class="form-control"></select>
+                        </div>
+                        <div class="form-group margin-bottom-20px">
+                            <label> Chiffre d'affarie</label>
+                            <input type="text" class="form-control form-control-sm" id="chiffreAffaire" name="chiffreAffaire" placeholder="Chiffre d'affaire">
+                        </div>
+                        <div class="form-group margin-bottom-20px">
+                            <label>Effectif</label>
+                            <input type="text" class="form-control form-control-sm" id="effectif" name="effectif" placeholder="Effectif">
+                        </div>
+
+
+                    </div>
+                    <div class="row"></div>
+                    <div class="row" style="margin-bottom: 50px;"></div>
+
+
+                    <div class=" background-white border-radius-20 box-shadow col-md-8   " style="margin-top: 50px;">
+                        <h3><i class="far fa-list-alt margin-right-10px text-main-color"></i> MOTIF DE LA DEMANDE DE RDV </h3>
+                        <hr style="background-color: black !important;">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h2><strong>Expertise bancaire</strong></h2>
+                                <br />
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Audit des charges financières">
+
+                                    <label> Audit des charges financières</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Recherche de financement">
+
+                                    <label> Recherche de financement</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Montage de business plan">
+
+                                    <label> Montage de business plan</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Gestion du contentieux bancaire">
+
+                                    <label> Gestion du contentieux bancaire</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h2><strong>Stratégie</strong></h2>
+                                <br />
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value=" Audit organisationnel">
+                                    <label> Audit organisationnel</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Etude et montage de projet industriel">
+                                    <label> Etude et montage de projet industriel</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Agrément à l'investissement CEPICI">
+                                    <label> Agrément à l'investissement CEPICI</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Due dilligence">
+                                    <label>Due dilligence</label>
+
+
+
+                                    <div class="checkbox"></div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2><strong>Management</strong></h2>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="conseil et assistance en Management">
+                                    <label> conseil et assistance en Management</label>
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Formation et renforcement des capacités">
+                                    <label> Formation et renforcement des capacités</label>
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Audit des charges générales, sociales et fiscales">
+                                    <label>Audit des charges générales, sociales et fiscales</label>
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Comptabilité et gestion de trésorerie">
+                                    <label>Comptabilité et gestion de trésorerie</label>
+                                    <div class="checkbox"></div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="motif" value="Fiscalité et assistance juridique">
+                                    <label>Fiscalité et assistance juridique</label>
+                                    <div class="checkbox"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class=" background-white border-radius-20 box-shadow col-md-4" style="margin-top: 50px;">
+                        <h3><i class="far fa-list-alt margin-right-10px text-main-color"></i> DETAILS  </h3>
+                        <hr style="background-color: black !important;">
+                        <div class="form-group margin-bottom-20px">
+                            <label> Objet RDV</label>
+                            <input type="text" id="objRDV" class="form-control" placeholder="Objet du RDV" />
+                        </div>
+                        <div class="form-group margin-bottom-20px">
+                            <label> Description</label>
+                            <textarea rows="10" class="form-control form-control-sm" id="description" placeholder="description" name="description"></textarea>
+                        </div>
+
+                        <div class="form-group margin-bottom-20px">
+                            <label> Date et heure souhaitée</label>
+                            <input type="date" id="daterdv" name="daterdv" class="form-control col-lg-1 col-md-1" />
+                            <input type="time" id="timerdv" name="timerdv" class="form-control" />
+                            @*<input type="time" id="time" name="time" class="form-control" />*@
+                        </div>
+
+                    </div>
+                    <button type="button" class="btn btn-lg border-2  btn-primary btn-block border-radius-15 padding-15px box-shadow" id="save">Prendre Rendez-vous</button>
+
+                    @*}*@
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="mymodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-body">
+                
+                <p>Traitement en cours. veuillez patienter svp !!!</p>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery_min.js"></script>
+<script src="~/assets/js/bootstrap.js"></script>
+
+<script>
+    $(document).ready(function () {
+        debugger
+
+
+        $("#save").click(function () {
+
+            $("#mymodal").modal("show");
+            debugger
+
+            var favorite = [];
+            $.each($("input[name='motif']:checked"), function () {
+                debugger
+                favorite.push($(this).val());
+            });
+            var datetime = "";
+            RDV = {
+                NomDemandeur: $("#Nom").val(),
+                PrenomsDemandeur: $("#Prenoms").val(),
+                Fonction: $("#titre").val(),
+                Telephone: $("#phone").val(),
+                Email: $("#email").val(),
+                NomEntreprise: $("#nomets").val(),
+                AnneeConstitution: $("#anneeconstitution").val(),
+                ObjetRDV: $("#objRDV").val(),
+                ChiffreAffaire: $("#chiffreAffaire").val(),
+                MotifDemande: "",
+                ListeMotif: favorite,
+                DescriptionMotif: $("#description").val(),
+                DateRDV: $("#daterdv").val(),
+                idSecteur: $("#activite").val(),
+                timeRDV: $("#timerdv").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Umbraco/Surface/RDV/DemandeRdv",
+                data: { "value": JSON.stringify(RDV) },
+                success: function (res) {
+                    debugger
+                    if (res.ok == true) {
+                        location.href = res.chemin;
+                        return false;
+                    }
+                },
+                error: function (res) {
+                    debugger
+                }
+            });
+
+        });
+
+
+        function showPleaseWait() {
+            if (document.querySelector("#pleaseWaitDialog") == null) {
+                var modalLoading = '<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog">\
+            <div class="modal-dialog">\
+                <div class="modal-content">\
+                    <div class="modal-header">\
+                        <h4 class="modal-title">Please wait...</h4>\
+                    </div>\
+                    <div class="modal-body">\
+                        <div class="progress">\
+                          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"\
+                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; height: 40px">\
+                          </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>\
+        </div>';
+                $(document.body).append(modalLoading);
+            }
+
+            $("#pleaseWaitDialog").modal("show");
+        }
+
+
+        $.ajax({
+            type: "GET",
+            url: "/Umbraco/Surface/RDV/Secteur",
+            success: function (res) {
+                if (res.ok == true) {
+                    var defaultline = "<option selected>---Choisir un secteur---</option>";
+                    $("#activite").append(defaultline);
+                    $.each(res.liste, function (i, n) {
+                        line = "<option value=" + n.ID+ ">" + n.LibelleSecteur + "</option>";
+                        $("#activite").append(line);
+                    });
+                }
+            }
+        });
+
+
+
+
+    });
+</script>

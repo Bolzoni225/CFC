@@ -1,0 +1,827 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Accueil>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "Layout_site.cshtml";
+
+}
+
+<div class="btc_main_slider_main_wrapper">
+    <div id="rev_slider_24_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="website-intro" data-source="gallery" style="background:#000000;padding:0px;">
+        <!-- START REVOLUTION SLIDER 5.4.1 fullscreen mode -->
+        <div id="rev_slider_24_1" class="rev_slider fullscreenbanner tiny_bullet_slider" style="display:none;" data-version="5.4.1">
+            <ul>
+                <!-- SLIDE  -->
+                <li data-index="rs-67" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="600" data-thumb="../../assets/images/woman2-100x50.jpg" data-rotate="0"
+                    data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="" data-slicey_shadow="0px 0px 0px 0px transparent">
+
+                    <img src="~/assets/images/header/slider_img.jpg" alt="" data-bgposition="center center" data-kenburns="on" data-duration="5000" data-ease="Power2.easeInOut" data-scalestart="100" data-scaleend="150" data-rotatestart="0" data-rotateend="0" data-blurstart="20" data-blurend="0"
+                         data-offsetstart="0 0" data-offsetend="0 0" class="rev-slidebg" data-no-retina>
+                    <!-- LAYERS -->
+                    <!-- LAYER NR. 14 -->
+                    <div class="tp-caption tp-shape tp-shapewrapper " id="slide-67-layer-1" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full"
+                         data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"delay":10,"speed":500,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power4.easeOut"},{"delay":"wait","speed":500,"frame":"999","to":"opacity:0;","ease":"Power4.easeOut"}]'
+                         data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 18;background-color:rgba(0, 0, 0, 0.5);">
+                    </div>
+
+                    <!-- LAYER NR. 15 -->
+                    <div class="tp-caption   tp-resizeme btc_slider_left_border" id="slide-68-layer-2" data-x="['left','left','center','center']" data-hoffset="['1','1','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-70','-70','-70','-70']" data-fontsize="['54','54','30','20']"
+                         data-lineheight="['60','60','35','25']" data-width="['none','none','481','360']" data-height="none" data-whitespace="['nowrap','nowrap','normal','normal']" data-type="text" data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 19; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 500; color: #ffffff; letter-spacing: 1px;font-family: 'Raleway', sans-serif;">CFC Finance, l'ingénierie financière<br>au service de votre développement.</div>
+
+
+
+
+                    <!-- LAYER NR. 16 -->
+                    <div class="tp-caption   tp-resizeme " id="slide-69-layer-3" data-x="['left','left','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['50','50','60','30']" data-fontsize="['22','22','22','22']"
+                         data-lineheight="['30','30','30','30']" data-width="['480','480','480','360']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 20; min-width: 480px; max-width: 480px; white-space: normal; font-size: 22px; line-height: 30px; font-weight: 400; color: #707070; letter-spacing: 0px;font-family: 'Lato', sans-serif;">L’expertise bancaire.</div>
+
+                    <!-- LAYER NR. 17 -->
+                    @*<a class="tp-caption rev-btn  tp-resizeme" href="#" target="_blank" id="slide-70-layer-7" data-x="['left','left','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['150','150','160','120']"
+                        data-width="210" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='' data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;fb:0;","style":"c:rgba(255,255,255,1);bs:solid;bw:0 0 0 0;"}]'
+                        data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 21; min-width: 210px; max-width: 210px; white-space: nowrap; font-size: 16px; line-height: 50px; font-weight: 900; color: #ffffff; letter-spacing: 2px;font-family: 'Lato', sans-serif;background-color:#ff880e;border-radius:30px 30px 30px 30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;text-decoration: none;text-transform:uppercase;">Rendez-vous</a>*@
+                </li>
+                <!-- SLIDE  -->
+                <li data-index="rs-66" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="600" data-thumb="../../assets/images/deskbg-100x50.jpg" data-rotate="0"
+                    data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="" data-slicey_shadow="0px 0px 0px 0px transparent">
+                    <!-- MAIN IMAGE -->
+                    <img src="~/assets/images/header/slider_img-2.jpg" alt="" data-bgposition="center center" data-kenburns="on" data-duration="5000" data-ease="Power2.easeInOut" data-scalestart="100" data-scaleend="150" data-rotatestart="0" data-rotateend="0" data-blurstart="20"
+                         data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" class="rev-slidebg" data-no-retina>
+                    <!-- LAYERS -->
+                    <!-- LAYER NR. 31 -->
+                    <div class="tp-caption tp-shape tp-shapewrapper " id="slide-71-layer-1" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full"
+                         data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"delay":10,"speed":500,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power4.easeOut"},{"delay":"wait","speed":500,"frame":"999","to":"opacity:0;","ease":"Power4.easeOut"}]'
+                         data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 18;background-color:rgba(0, 0, 0, 0.5);">
+                    </div>
+
+
+
+                    <div class="tp-caption   tp-resizeme btc_slider_second_left_border" id="slide-72-layer-2" data-x="['center','center','center','center']" data-hoffset="['1','1','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-70','-70','-70','-70']"
+                         data-fontsize="['54','54','30','20']" data-lineheight="['60','60','35','25']" data-width="['none','none','481','360']" data-height="none" data-whitespace="['nowrap','nowrap','normal','normal']" data-type="text" data-responsive_offset="on"
+                         data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 19; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 500; color: #ffffff; letter-spacing: 1px;font-family: 'Raleway', sans-serif;">CFC Finance,<br>Donnez de l’élan à votre carrière en finance</div>
+
+                    <!-- LAYER NR. 32 -->
+                    <!-- LAYER NR. 16 -->
+                    <div class="tp-caption   tp-resizeme " id="slide-73-layer-2" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['50','50','60','30']" data-fontsize="['22','22','22','22']"
+                         data-lineheight="['30','30','30','30']" data-width="['480','480','480','360']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 20; min-width: 480px; max-width: 480px; white-space: normal; font-size: 22px; line-height: 30px; font-weight: 400; color: #707070; letter-spacing: 0px;font-family: 'Lato', sans-serif;">La stratégie.</div>
+
+
+                    <!-- LAYER NR. 34 -->
+                    @*<a class="tp-caption rev-btn  tp-resizeme" href="#" target="_blank" id="slide-74-layer-7" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['150','150','160','120']"
+                        data-width="210" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='' data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;fb:0;","style":"c:rgba(255,255,255,1);bs:solid;bw:0 0 0 0;"}]'
+                        data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 21; min-width: 210px; max-width: 210px; white-space: nowrap; font-size: 16px; line-height: 50px; font-weight: 900; color: #ffffff; letter-spacing: 2px;font-family: 'Lato', sans-serif;background-color:#ff880e;border-radius:30px 30px 30px 30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;text-decoration: none;text-transform:uppercase;">Rendez-vous</a>*@
+                </li>
+                <!-- SLIDE  -->
+                <li data-index="rs-68" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="600" data-thumb="../../assets/images/reachout_bg-100x50.jpg" data-rotate="0"
+                    data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="" data-slicey_shadow="0px 0px 0px 0px transparent">
+                    <!-- MAIN IMAGE -->
+                    <img src="~/assets/images/header/slider_img-3.jpg" alt="" data-bgposition="center center" data-kenburns="on" data-duration="5000" data-ease="Power2.easeInOut" data-scalestart="100" data-scaleend="150" data-rotatestart="0" data-rotateend="0" data-blurstart="20"
+                         data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" class="rev-slidebg" data-no-retina>
+                    <!-- LAYERS -->
+                    <!-- LAYER NR. 48 -->
+                    <div class="tp-caption tp-shape tp-shapewrapper " id="slide-75-layer-1" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full"
+                         data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames='[{"delay":10,"speed":500,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power4.easeOut"},{"delay":"wait","speed":500,"frame":"999","to":"opacity:0;","ease":"Power4.easeOut"}]'
+                         data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 18;background-color:rgba(0, 0, 0, 0.5);">
+                    </div>
+
+                    <!-- LAYER NR. 49 -->
+                    <div class="tp-caption   tp-resizeme btc_slider_left_border btc_slider_third_left_border" id="slide-76-layer-2" data-x="['right','right','center','center']" data-hoffset="['1','1','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-70','-70','-70','-70']"
+                         data-fontsize="['54','54','30','20']" data-lineheight="['60','60','35','25']" data-width="['none','none','481','360']" data-height="none" data-whitespace="['nowrap','nowrap','normal','normal']" data-type="text" data-responsive_offset="on"
+                         data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['right','right','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 19; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 500; color: #ffffff; letter-spacing: 1px;font-family: 'Raleway', sans-serif;">CFC Finance<br>Un accompagnement basé sur la confiance.</div>
+
+
+                    <!-- LAYER NR. 16 -->
+                    <div class="tp-caption   tp-resizeme " id="slide-77-layer-2" data-x="['right','right','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['50','50','60','30']" data-fontsize="['22','22','22','22']"
+                         data-lineheight="['30','30','30','30']" data-width="['480','480','480','360']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['right','right','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 20; min-width: 480px; max-width: 480px; white-space: normal; font-size: 22px; line-height: 30px; font-weight: 400; color: #707070; letter-spacing: 0px;font-family: 'Lato', sans-serif;">Le management.</div>
+
+                    <!-- LAYER NR. 51 -->
+                    <!-- LAYER NR. 34 -->
+                    @*<a class="tp-caption rev-btn  tp-resizeme" href="#" target="_blank" id="slide-78-layer-7" data-x="['right','right','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['150','150','160','120']"
+                        data-width="210" data-height="none" data-whitespace="nowrap" data-type="button" data-actions='' data-responsive_offset="on" data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:0.9;sY:0.9;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"sX:0.9;sY:0.9;opacity:0;fb:20px;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;fb:0;","style":"c:rgba(255,255,255,1);bs:solid;bw:0 0 0 0;"}]'
+                        data-textAlign="['center','center','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 21; min-width: 210px; max-width: 210px; white-space: nowrap; font-size: 16px; line-height: 50px; font-weight: 900; color: #ffffff; letter-spacing: 2px;font-family: 'Lato', sans-serif;background-color:#ff880e;border-radius:30px 30px 30px 30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;text-decoration: none;text-transform:uppercase;">Rendez-vous</a>*@
+                </li>
+            </ul>
+            <div class="tp-bannertimer tp-bottom" style="height: 5px; background: rgba(204,204,204,0.5);"></div>
+        </div>
+    </div>
+    <!-- END REVOLUTION SLIDER -->
+</div>
+<!-- rs slider Wrapper End -->
+<!-- Testimonials Wrapper Start -->
+<div class="btc_testimonial_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="btc_testimonial_info">
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                    <!-- Bottom Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#quote-carousel" data-slide-to="0" class="active">
+                            <img class="img-responsive " src="~/assets/images/content/testi_img1.jpg" alt="test">
+                        </li>
+                        <li data-target="#quote-carousel" data-slide-to="1">
+                            <img class="img-responsive" src="~/assets/images/content/testi_img2.png" alt="test">
+                        </li>
+                        <li data-target="#quote-carousel" data-slide-to="2">
+                            <img class="img-responsive" src="~/assets/images/content/testi_img3.jpg" alt="test">
+                        </li>
+
+                    </ol>
+
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner text-center">
+                        <div class="btc_center_line"></div>
+                        <!-- Quote 1 -->
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-2 col-xs-offset-2 btc_testi_padding_zero">
+                                    <div class="btc_testi_quote_wrapper1"></div>
+                                    <div class="btc_testi_quote_wrapper2"></div>
+                                    <p>“Actifs dans les banques et les grandes entreprises, une vision globale sur tous les aspects des besoins des clients..”</p>
+                                    <div class="btc_testi_cont_bottom_line"></div>
+                                    <h1>L’expertise bancaire</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Quote 2 -->
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-2 col-xs-offset-2 btc_testi_padding_zero">
+                                    <div class="btc_testi_quote_wrapper1"></div>
+                                    <div class="btc_testi_quote_wrapper2"></div>
+                                    <p>L’audit organisationnel, L’étude et le montage de projets industriels,L’agrément à l’investissement CEPICI et Les due diligence. </p>
+                                    <div class="btc_testi_cont_bottom_line"></div>
+                                    <h1>La Stratégie </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Quote 3 -->
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-2 col-xs-offset-2 btc_testi_padding_zero">
+                                    <div class="btc_testi_quote_wrapper1"></div>
+                                    <div class="btc_testi_quote_wrapper2"></div>
+                                    <p>
+                                        Le conseil et assistance en management, La formation et le renforcement des capacités,L’audit des charges générales, sociales et fiscales, La comptabilité et gestion de trésorerie, La fiscalité et l’assistance juridique
+                                        .
+                                    </p>
+                                    <div class="btc_testi_cont_bottom_line"></div>
+                                    <h1>Le Management :</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- btc Testimonials Wrapper End -->
+<!-- btc steps Wrapper Start -->
+<div class="btc_steps_main_wrapper" data-parallax="scroll" data-image-src="images/content/service_bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="btc_steps_heading_wrapper">
+                    <p>CFC Finance</p>
+                    <h1>Bienvenue à CFC Finance</h1>
+                    <span>#</span>
+                    <h5>CFC FINANCE Sarl (CFCF) est un cabinet d’expertise bancaire créée par des cadres supérieurs de banque capitalisant plusieurs années d’expérience dans la structuration de financements complexes, le risk-management et l’audit.</h5>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#home">L'expertise bancaire</a></li>
+                    <li><a data-toggle="pill" href="#menu1">La stratégie</a></li>
+                    <li><a data-toggle="pill" href="#menu2">Le Management </a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="row btc_steps_wrappers">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper1">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-money"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="">L’audit des charges financières</a></h2>
+                                        <p>Les relations entre une entreprise et sa banque sont régies aussi bien par le cadre juridique et institutionnel que par les conventions et autres accords signés par l’ensemble des parties...</p>
+                                        <h4><a href="PageExpertiseBancaire">Voir plus</a></h4>
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper2">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-wallet"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">La recherche de financements</a></h2>
+                                        <p>La solide expérience bancaire des experts de notre institution ainsi que la densité de notre réseau de banques partenaires nous ont permis de mobiliser des financements importants pour nos clients...</p>
+                                        <h4><a href="PageExpertiseBancaire">Voir plus</a></h4>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper3">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-money-1"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">Le montage de business plans</a></h2>
+                                        <p>Vous avez un projet pour lequel vous souhaitez avoir une visibilité quant aux conditions de sa réalisation et de sa rentabilité, les experts de CFC FINANCE se tiennent à votre disposition et vous assistent..</p>
+                                        <h4><a href="PageExpertiseBancaire">Voir plus</a></h4>
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper4">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-coins"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">La gestion du contentieux bancaire</a></h2>
+                                        <p>Vous avez bénéficié de financements bancaires que vous éprouvez des difficultés à rembourser pour diverses raisons. Vous êtes constamment menacés de poursuites devant les juridictions compétentes..</p>
+                                        <h4><a href="PageExpertiseBancaire">Voir plus</a></h4>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btc_steps_bottom_line_wrapper"></div>
+                        </div>
+
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="row btc_steps_wrappers">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper1">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-money"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">L’audit organisationnel</a></h2>
+                                        <p>Dans le cadre de la politique de renforcement des performances de votre entreprise, vous souhaitez vous doter de méthodes de gestion financière et organisationnelle modernes, nécessaires à son développement serein..</p>
+                                        <h4><a href="PageStrategie">Voir plus</a></h4>
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper2">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-wallet"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">L’étude et le montage de projets industriels</a></h2>
+                                        <p>A travers ce service, les experts du cabinet CFC FINANCE conçoivent et élaborent votre projet industriel pour en déterminer la faisabilité, le coût et la rentabilité..</p>
+                                        <h4><a href="PageStrategie">Voir plus</a></h4>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper3">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-money-1"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">L’agrément à l’investissement CEPICI</a></h2>
+                                        <p>Dans le cadre de la mise en œuvre de votre projet d’investissement, vous souhaitez tirer profit des avantages fiscaux et douaniers offerts par la législation en vigueur..</p>
+                                        <h4><a href="PageStrategie">Voir plus</a></h4>
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper4">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-coins"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">Les due diligence</a></h2>
+                                        <p>Vous êtes un investisseur et désirez prendre des participations dans une entreprise existante en sécurisant au maximum votre investissement, alors les experts de CFC FINANCE vous assistent dans la mise en œuvre..</p>
+                                        <h4><a href="PageStrategie">Voir plus</a></h4>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btc_steps_bottom_line_wrapper"></div>
+                        </div>
+                    </div>
+
+                    <div id="menu2" class="tab-pane fade">
+                        <div class="row btc_steps_wrappers">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper1">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-money"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">Le conseil et assistance en management</a></h2>
+                                        <p>Le Conseil & assistance en management est un service par lequel nous assistons les chefs d’entreprises dans leur volonté de mettre en place des techniques modernes de gestion. A l’issue d’un diagnostic opérationnel..</p>
+                                        <h4><a href="PageManagement">Voir plus</a></h4>
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper2">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-wallet"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">La formation et le renforcement des capacités</a></h2>
+                                        <p>Les Ressources Humaines constituant l’un des facteurs clés de succès de toute entreprise, CFC FINANCE se tient à vos côtés pour aider vos collaborateurs à renforcer leurs capacités et acquérir des connaissances ..</p>
+                                        <h4><a href="PageManagement">Voir plus</a></h4>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper3">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-money-1"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">L’audit des charges générales, sociales et fiscales </a></h2>
+                                        <p>L’audit des charges générales, sociales et fiscales consiste à passer en revue l’ensemble des charges de l’entreprise de façon approfondie en vue d’en réduire le niveau et améliorer..</p>
+                                        <h4><a href="PageManagement">Voir plus</a></h4>
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="btc_steps_main_box_wrapper btc_steps_main_box_wrapper4">
+                                    <div class="btc_step_icon_wrapper">
+                                        <div class="btc_step_hover_effect">
+                                            <i class="flaticon-coins"></i>
+                                            <div class="btc_step_overlay"></div>
+                                        </div>
+                                    </div>
+                                    <div class="btc_step_icon_cont_wrapper">
+                                        <h2><a href="#">La comptabilité et gestion de trésorerie</a></h2>
+                                        <p>La comptabilité est le système d’organisation par lequel les flux et opérations d’une entreprise sont traduits en termes financiers. A cet effet, elle se doit de fournir une image fidèle de la situation financière..</p>
+                                        <h4><a href="PageManagement">Voir plus</a></h4>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btc_steps_bottom_line_wrapper"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- btc steps Wrapper End -->
+<!-- btc currency Wrapper Start -->
+<div class="btc_currency_main_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-5 col-lg-7 col-md-offset-5 col-md-7 col-sm-offset-4 col-sm-8 col-xs-12">
+                <div class="btc_currency_heading_wrapper">
+                    <h5 style="color:red; font-size:45px">CFC FINANCE</h5>
+                    <h3 style="color:blue; font-size:25px">Les offres de services du cabinet !</h3>
+                    <span>#</span>
+                    <p style="color:red; font-size:25px">Les offres de services de CFC FINANCE se déclinent en trois axes, en l’occurrence l’expertise bancaire, la stratégie et le management.
+                </div>
+                <div class="btc_currency_boxes_main_wrapper">
+                    <div class="btc_currency_box1">
+                        <i class="flaticon-progress-report"></i>
+                        <h5><a href="#"><p style="color:blue;font-style:gras;">L’expertise bancaire</p></a></h5>
+                    </div>
+                    <div class="btc_currency_box2">
+                        <i class="flaticon-wallet"></i>
+                        <h5><a href="#" style="color:blue;font-style:gras;">La Stratégie </a></h5>
+                    </div>
+                    <!--<div class="btc_currency_box3">
+                        <i class="flaticon-shuffle"></i>
+                        <h5><a href="#">Le Management </a></h5>
+                    </div>-->
+                    <div class="btc_currency_box4">
+                        <i class="flaticon-shield"></i>
+                        <h5><a href="#" style="color:blue;font-style:gras;">Le Management</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="btc_video_main_wrapper" style="background-color:#0f75bd">
+    <div class="container">
+        <div class="btc_video_left_wrapper">
+            <h1>Des consultants <span>expérimentés</span> et engagés pour<br> accompagner votre <span>entreprise</span>!</h1>
+        </div>
+        @*<div class="btc_video_right_wrapper">
+                <ul>
+                    <li><a href="#">Demande de RDV</a></li>
+                </ul>
+            </div>*@
+    </div>
+</div>
+
+<div class="btc_sell_main_wrapper">
+    <div class="btc_sell_img_overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="btc_sell_left_cont_wrapper">
+                    <h5>CFC FINANCE</h5>
+                    <h3>COACHING </h3>
+                    <span>#</span>
+                    <p>
+                        Vous voulez rehausser vos performances, améliorer vos compétences, devenir plus compétitif, demandez un rendez vous afin de recevoir un coaching taillé selon vos besoins
+                    </p>
+                    <a href="FormulaireRdv">Rendez-vous</a>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+                <div class="btc_sell_right_side_wrapper" style="margin-top:-120px;">
+                    <img src="~/assets/images/content/mac.jpg" alt="buy_img" height="400">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- btc Sell Wrapper End -->
+<!-- btc team Wrapper Start -->
+<div class="btc_team_main_wrapper" data-parallax="scroll" data-image-src='@Url.Content("assets/images/content/service_bg.jpg")'>
+    <div class="container">
+        <div class="btc_team_left_wrapper">
+            <h5>MEMBRE DE L'ÉQUIPE</h5>
+            <h3>Nos experts</h3>
+            <span>#</span>
+            <p>Des cadres supérieurs de banque capitalisant plusieurs années d’expérience dans la structuration de financements complexes, le risk-management et l’audit.</p>
+        </div>
+        <div class="btc_team_right_wrapper">
+            <div class="btc_team_slider_wrapper">
+                <div class="owl-carousel owl-theme">
+                    <div class="item">
+                        <div class="btc_team_slider_cont_main_wrapper">
+                            <div class="btc_team_img_wrapper">
+                                <img src='@Url.Content("assets/images/content/team1.jpg")' alt="team_img1">
+                                <div class="btc_team_social_wrapper">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="btc_team_img_cont_wrapper">
+                                <h4><a href="#">Ajay Suryavanshi</a></h4>
+                                <p>(Consultant)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="btc_team_slider_cont_main_wrapper">
+                            <div class="btc_team_img_wrapper">
+                                <img src='@Url.Content("assets/images/content/team2.jpg")' alt="team_img1">
+                                <div class="btc_team_social_wrapper">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="btc_team_img_cont_wrapper">
+                                <h4><a href="#">Jenifer Doe</a></h4>
+                                <p>(Consultant)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="btc_team_slider_cont_main_wrapper">
+                            <div class="btc_team_img_wrapper">
+                                <img src='@Url.Content("assets/images/content/team3.jpg")' alt="team_img1">
+                                <div class="btc_team_social_wrapper">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="btc_team_img_cont_wrapper">
+                                <h4><a href="#">Akshay Handge</a></h4>
+                                <p>(Consultant)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="btc_blog_index_main_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="btc_blog_index_heading_main_wrapper">
+                    <div class="btc_blog_index_heading_wrapper">
+                        <p>Notre Blog</p>
+                        <h1>Evènements CFC FINANCE</h1>
+                        <span>#</span>
+                        <h5>Participer à nos coaching, afterwork, causérie débat etc...</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="div_evenement">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- btc blog Wrapper End -->
+<!-- btc partner slider Wrapper Start -->
+<div class="btc_partner_slider_main_wrapper" data-parallax="scroll" data-image-src="images/content/service_bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="btc_partner_slider_heading_wrapper">
+                    <h5>IL NOUS FONT CONFIANCE</h5>
+                    <h3>Nos partenaires</h3>
+                    <span>#</span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="btc_partner_slider_wrapper">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img1.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img10.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img11.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img12.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img13.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img14.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img15.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img2.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img3.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img4.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img5.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img6.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img7.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img8.png" alt="partner_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="btc_partner_img">
+                                <img src="~/assets/images/parteners_CFC/img9.png" alt="partner_img" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/adminAssets/js/jquery-3.2.1.min.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
+<script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //swal("Attention", "Alert", "error");
+        charger_donnees();
+
+    });
+
+    function charger_donnees() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("NewsEvents", "RDV")',
+            dataType: "json",
+            success: function (data) {
+                if (data.ok == true) {
+                    if (data.data.length > 0) {
+                        $.each(data.data, function (i, val) {
+
+                            var image = "/assets/images/content/blog_img1.jpg";
+                            if (val.URLIMAGE != "" && val.URLIMAGE != null) {
+                                image = val.URLIMAGE;
+                            }
+                            var estPayant = "GRATUIT";
+                            if (val.ESTPAYANT == true && val.ESTPAYANT != null) {
+                                estPayant = "PAYANT";
+                            }
+
+                            var date = ConvertDate(val.DATE_HEURE);
+
+                            var line = '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">'
+                                + '<div class="btc_blog_indx_box_wrapper">'
+                                + '<div class="btc_blog_indx_img_wrapper">'
+                                + '<img src="' + image + '" alt="blog_img">'
+                                    + '<div class="btc_blog_indx_date_wrapper">'
+                                    + '<ul>'
+                                    + '<li>' + date.JOUR + '</li>'
+                                    + '<li>' + date.MOIS + '</li>'
+                                    + '</ul>'
+                                    + '</div>'
+                                    + '</div>'
+                                    + '<div class="btc_blog_indx_cont_wrapper">'
+                                + '<h5>' + val.NOM + '</h5>'
+                                + '<h4><a href="">' + val.TITRE + '</a></h4>'
+                                + '<p>' + val.DESCRIPTION + '</p>'
+                                    + '</div>'
+                                    + '<div class="btc_blog_indx_cont_bottom">'
+
+                                    + '<div class="btc_blog_indx_cont_bottom_left">'
+                                + '<p><i class="fa fa-comments-o"></i> &nbsp;<a>' + estPayant + '</a></p>'
+                                    + '</div>'
+
+                                + '<div class="btc_blog_indx_cont_bottom_right">'
+                                + '<p><i class="fa fa-user"></i> &nbsp;<a style="color:#ff880e; cursor:pointer" onclick="participer(\'' + val.ROWID + '\', \'' + val.NOM + '\',\'' + val.TITRE + '\', \'' + val.ESTPAYANT + '\', \'' + val.TARIF + '\')">PARTICIPER</a></p>'
+                                    + '</div>'
+
+                                    + '</div>'
+                                    + '</div>'
+                                    + '</div>';
+
+                            $("#div_evenement").append(line);
+                        });
+                    }
+
+                }
+            },
+            error: function (msg) {
+                //swal("Attention", data.message, "error");
+            }
+        });
+    }
+
+    function participer(ROWID, NOM, TITRE, ESTPAYANT, TARIF) {
+        //alert(ROWID + ' | ' + NOM + ' | ' + TITRE + ' | ' + ESTPAYANT + ' | ' + TARIF);
+
+        var operation = {
+            ROWID: ROWID,
+            NOM: NOM,
+            TITRE: TITRE,
+            ESTPAYANT: ESTPAYANT,
+            TARIF: TARIF
+        };
+
+        //alert(JSON.stringify(operation));
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("CreateCurrentEvent", "RDV")',
+            data: { jsonObject: JSON.stringify(operation) },
+            dataType: "json",
+            success: function (data) {
+                if (data.ok == true) {
+                    //swal("Succès", data.message, "success");
+                    window.location.href = data.url;
+                }
+                else {
+                    swal("Attention", data.message , "error");
+                    }
+            },
+            error: function (msg) {
+
+                swal("Ooups!!!", "code erreur 404 ", "error");
+
+            }
+
+        });
+    }
+
+    function ConvertDate(data) {
+        const months = [
+            'janvier',
+            'février',
+            'mars',
+            'avril',
+            'mai',
+            'juin',
+            'juillet',
+            'août',
+            'septembre',
+            'octobre',
+            'novembre',
+            'décembre'
+        ];
+
+
+        if (data != null) {
+            var date = new Date(parseInt(data.substr(6)));
+            //Format dd-mm-yyyy
+            //var retour = (('0' + (date.getDate())).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear());
+
+            var jour = ('0' + (date.getDate())).slice(-2);
+
+            var mois = ('0' + date.getMonth()).slice(-2);
+            const monthName = months[(parseInt(mois))];
+
+            return { JOUR: jour, MOIS: monthName};
+
+        }
+        else
+            return '';
+    }
+
+</script>
+
