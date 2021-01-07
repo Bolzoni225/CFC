@@ -10,6 +10,7 @@ namespace CFC.Dto
         public string NomDemandeur { get; set; }
         public string PrenomsDemandeur { get; set; }
         public string Fonction { get; set; }
+
         public string Telephone { get; set; }
         public string Email { get; set; }
         public string NomEntreprise { get; set; }
