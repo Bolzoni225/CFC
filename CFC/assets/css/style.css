@@ -1917,7 +1917,7 @@ ul{
 /*-- btc calcultor Wrapper Start --*/
 .btc_calc_main_wrapper1 {
     /*background: url('../images/content/bit_coin_bg.jpg') 50% 0 repeat-y;*/
-    background-color:red;
+    background-color:gray;
     background-size: cover;
     background-position: center 0;
     width: 100%;
