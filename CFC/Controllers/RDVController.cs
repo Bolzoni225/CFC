@@ -33,7 +33,6 @@ namespace CFC.Controllers
         [HttpPost]
         public JsonResult DemandeRdv(string value)
         {
-
             var RDV = JsonConvert.DeserializeObject<RdvModel>(value);
             string url = string.Empty;
 
