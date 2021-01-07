@@ -62,6 +62,17 @@
                     <textarea type="text" class="form-control form-control-sm" placeholder="Description évènement / coaching" id="txtDescription"></textarea>
                 </div>
 
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i> Date</label>
+                    <input type="date" id="dateevent" class="form-control">
+                </div>
+
+                <div class="col-md-6 margin-bottom-20px">
+                    <label><i class="far fa-list-alt margin-right-10px"></i>Heure</label>
+                    <input type="time" id="timeevent" class="form-control">
+                </div>
+
+
                 <div class="col-md-6 margin-bottom-20px checkbox">
                     <label>
                         <input name="optionsCheckboxes" type="checkbox" id="chkEstPayant">
@@ -278,6 +289,10 @@
 
 
     function Enregistrer() {
+      
+           
+
+        var Date_Heure = $("#dateevent").val() + ' ' + $("#timeevent").val();
         const item = {
             rowid: ID,
             type: parseInt($("#selType").val()),
@@ -287,7 +302,9 @@
             estPayant: $("#chkEstPayant").is(":checked"),
             estPublier: $("#chkEstPublier").is(":checked"),
             tarif: parseFloat($("#txtTarif").val()),
-            urlImage: $("#inp_img").val()
+            urlImage: $("#inp_img").val(),
+            Date_Heure : Date_Heure
+           
         };
         debugger;
         $.ajax({
@@ -295,7 +312,8 @@
             method: "post",
             data: { value: JSON.stringify(item) }
         }).done(function (retour) {
-            if (retour.data.Etat) {
+            debugger
+            if (retour.data) {
                 $("#myPopUp").dialog("close");
                 $("#tableEvents").jsGrid("loadData");
             }
