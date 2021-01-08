@@ -174,7 +174,7 @@
                         if (retour.data.Etat) {
                             $("#tableEvents").jsGrid("loadData");
                         }
-                    }).catch(error => console.log(error));
+                    });//.catch(error => console.log(error));
                 }
             },
             fields: [
@@ -317,7 +317,7 @@
                 $("#myPopUp").dialog("close");
                 $("#tableEvents").jsGrid("loadData");
             }
-        }).catch(error => console.log(error));
+        });//.catch(error => console.log(error));
     }
 
     function Effacer() {

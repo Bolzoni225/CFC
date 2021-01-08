@@ -269,7 +269,7 @@
                     data: { "id": JSON.stringify(idRdv) },
                     success: function (res) {
                         debugger
-                        
+                        $("#activite").val(res.secteur);
                         if (res.ok == true) {
                             $.each(res.liste, function (i, n) {
                                 debugger
@@ -283,7 +283,7 @@
                                 $("#Annec").val(n.AnneeConstitution);
                                 $("#CA").val(n.ChiffreAffaire);
                                 $("#objet").val(n.ObjetRDV);
-                                $("#activite").val(n.secteur);
+                            
                                 $("#timeRDV").val(time);
                                 $("#dateRDV").val(ConvertDate(n.DateRDV));
                                 $.each(res.ListMotif, function (i, t) {

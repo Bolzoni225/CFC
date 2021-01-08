@@ -11,5 +11,6 @@ namespace CFC.Dto
         public string NomUtilisateur { get; set; }
         public string Port { get; set; }
         public string Mdp { get; set; }
+        public string ReceiverMail { get; set; }
     }
 }

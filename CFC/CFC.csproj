@@ -394,6 +394,7 @@
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\cancelimg.png" />
+    <Content Include="assets\images\capture_map_cfc.PNG" />
     <Content Include="assets\images\content\about_buy_bg.jpg" />
     <Content Include="assets\images\content\about_down.png" />
     <Content Include="assets\images\content\bit_coin_bg.jpg" />

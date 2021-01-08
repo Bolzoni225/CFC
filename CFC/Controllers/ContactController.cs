@@ -37,7 +37,7 @@ namespace CFC.Controllers
             string phone = Form["phone"].ToString();
             string objet = Form["objet"].ToString();
             string message = Form["message"].ToString();
-            message = message + "\n\n\n" + "Numéro de Téléphone " + phone;
+            message = message + "\n\n\n" + "Nous restons disponible aux adresses suivantes : \n Téléphone :" + phone +" \n Email: "+email;
 
             var client = new SmtpClient() {
                 UseDefaultCredentials = false,
@@ -45,14 +45,15 @@ namespace CFC.Controllers
                 Credentials = new NetworkCredential(ParametreSmtp.NomUtilisateur, ParametreSmtp.Mdp),
                 Host =ParametreSmtp.NomServeur,
                 Port = Convert.ToInt32(ParametreSmtp.Port),
-                EnableSsl = true
+                EnableSsl = false
             };
             //client.Port = 25;
             //client.Host = "localhost";
             //client.Credentials = new NetworkCredential("user1@test.com", "cedricanselme");
             
             //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            MailMessage mailMessage = new MailMessage(email,ParametreSmtp.NomUtilisateur);
+            MailMessage mailMessage = new MailMessage(ParametreSmtp.NomUtilisateur,ParametreSmtp.ReceiverMail);
+               
             mailMessage.Subject = objet;
             mailMessage.Body = message;
             

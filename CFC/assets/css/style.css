@@ -4207,6 +4207,19 @@ ul{
 }
 /*-- btc life style Wrapper End --*/
 /*-- btc buy Wrapper Start --*/
+.btc_about_buy_main_wrapper1 {
+    background-color:black;
+    background-size: cover;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    float: left;
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    position: relative;
+    text-align: center;
+}
 .btc_about_buy_main_wrapper{
 	background:url('../images/content/about_buy_bg.jpg') 50% 0 repeat-y;
 	background-size:cover;

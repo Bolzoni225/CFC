@@ -5,8 +5,7 @@
 }
 <link href="~/assets/bootstrap-5.0.0-beta1-dist/css/bootstrap.css" rel="stylesheet" />
 <link href="~/assets/bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css" rel="stylesheet" />
-<script src="~/assets/bootstrap-5.0.0-beta1-dist/js/bootstrap.js"></script>
-<script src="~/assets/bootstrap-5.0.0-beta1-dist/js/bootstrap.min.js"></script>
+
 <style>
     a {
         text-decoration: none; /* no underline */
@@ -15,8 +14,14 @@
     li > ul {
         padding-left: 0px;
         margin-left: 0px;
-
     }
+
+
+    .btc_footer_email_wrapper,.btc_footer_logo_right {
+        color: #797979;
+    }
+
+
 </style>
 <!-- btc tittle Wrapper Start -->
 <div class="btc_tittle_main_wrapper">
@@ -55,16 +60,16 @@
             </div>
 
             <div id="carouselExampleCaptions" class="col-lg-8 carousel slide" data-bs-ride="carousel">
-                
+
                 <div class="carousel-inner" id="div_evenement">
                     @*<div class="carousel-item active" >
-                        <img src="~/assets/images/content/blog_img1.jpg" class="d-block  w-100" style="height:400px;" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </div>
-                    </div>*@
-                    
+                            <img src="~/assets/images/content/blog_img1.jpg" class="d-block  w-100" style="height:400px;" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            </div>
+                        </div>*@
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -191,6 +196,8 @@
 <script src="~/assets/adminAssets/js/jquery-3.2.1.min.js"></script>
 <script src="~/assets/adminAssets/sweet-alert2/sweetalert2.all.js"></script>
 <script src="~/assets/adminAssets/sweet-alert2/sweetalert2.min.js"></script>
+@*<script src="~/assets/bootstrap-5.0.0-beta1-dist/js/bootstrap.js"></script>*@
+<script src="~/assets/bootstrap-5.0.0-beta1-dist/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
         charger_donnees();
